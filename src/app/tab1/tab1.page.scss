@@ -1,0 +1,36 @@
+
+.sy_tubiao {
+    width: 100%;
+    padding: 10px 0;
+    overflow: hidden;
+    background-color: white;
+}
+
+.sy_tu {
+    width: 100%;
+    overflow: hidden;
+}
+
+.sy_dztj {
+    float: left;
+    width: 25%;
+    overflow: hidden;
+    padding-bottom: 2px;
+    padding-top: 10px;
+}
+
+    .sy_dztj img {
+        width: 48px;
+        height: 48px;
+        display: block;
+        margin: 5px auto;
+    }
+
+    .sy_dztj label {
+        font-size: 13px;
+        display: block;
+        width: 100%;
+        color: #686868;
+        padding-top: 5px;
+        text-align: center;
+    }

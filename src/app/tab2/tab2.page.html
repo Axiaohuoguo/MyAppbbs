@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      动态
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- top导航 -->
+  <!-- Icon start -->
+  <ion-segment #segment1 [(ngModel)]="tabState" color="primary" (ionChange)="segmentChanged($event)">
+
+    <ion-segment-button layout="icon-start" value="all">
+      <ion-label>全部</ion-label>
+      <ion-icon name="earth"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button layout="icon-start" value="follow">
+      <ion-label>关注</ion-label>
+      <ion-icon name="heart"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button layout="icon-start" value="other">
+      <ion-label>其他</ion-label>
+      <ion-icon name="pin"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+  <!-- top导航 -->
+
+  <div [ngSwitch]="tabState">
+
+    <div class="con1" *ngSwitchCase="'all'">
+
+
+
+      <ion-card>
+        <ion-item>
+          <ion-thumbnail style=" border-radius:100%; overflow:hidden;" slot="start">
+            <img src="./assets/images/head2.png">
+          </ion-thumbnail>
+          <ion-label>Item Avatar</ion-label>
+        </ion-item>
+
+        <ion-card-content>
+          This is content, without any paragraph or header tags,
+          within an ion-card-content element.
+          
+        </ion-card-content>
+
+      </ion-card>
+
+
+
+    </div>
+
+    <div class="con2" *ngSwitchCase="'follow'">
+      关注
+    </div>
+
+    <div class="con3" *ngSwitchCase="'other'">
+      其他
+    </div>
+
+  </div>
+</ion-content>
