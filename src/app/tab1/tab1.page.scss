@@ -1,4 +1,10 @@
-
+a{ 
+    text-decoration:none; //去掉默认下滑线
+    
+}
+a:hover{
+    text-decoration:none;//鼠标放上面不显示下划线
+} 
 .sy_tubiao {
     width: 100%;
     padding: 10px 0;

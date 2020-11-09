@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="div_head">
+    <img  src="./assets/images/head2.png">
+      <div>
+        <ion-text color="secondary">
+          <h1>Cool School</h1>
+        </ion-text>
+      </div>
+  </div>
+
+  
+  <ion-card>
+     <form>
+   <ion-item>
+     <ion-label position="floating">
+       用户名
+       <ion-text   color="danger">*</ion-text>
+      </ion-label>
+     <ion-input name="username" [(ngModel)]="loginInfo.username" required  type="text"></ion-input>
+   </ion-item>
+   <ion-item>
+
+
+      <ion-icon (click)="isShowClick()" slot="end" [name]="isShow"></ion-icon>
+
+     <ion-label position="floating">
+       密码 
+       <ion-text type="passwod" color="danger">*</ion-text>
+      </ion-label>    
+     <ion-input [type]="isPas"  name=passwod [(ngModel)]="loginInfo.password" required >
+     </ion-input>
+   </ion-item>
+
+   <ion-item>
+    <ion-label>记住我？</ion-label>
+    <ion-checkbox name="isRemember" [(ngModel)]=loginInfo.isRemember color="secondary"></ion-checkbox>    
+  </ion-item>
+
+   </form>
+  </ion-card>
+
+  <ion-button (click)="onClickLogin()" color="tertiary" expand="block"  shape="round">
+    登录
+  </ion-button>
+
+  <ion-button [routerLink]="['/register']"  expand="block" fill="clear" shape="round">
+    注册
+  </ion-button>
+
+{{ loginInfo | json }}
+
+</ion-content>

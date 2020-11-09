@@ -1,10 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <!-- <ion-title slot="end">个人中心</ion-title> -->
-    <ion-buttons slot="end">
-      <ion-icon name="menu"></ion-icon>
-      <ion-menu-button menu="menuId"></ion-menu-button>
-    </ion-buttons>
+    <ion-title slot="start">个人中心</ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -14,10 +10,18 @@
 
 
   <!-- 个人基本信息 -->
+<ion-item>
+  <ion-buttons slot="end">
+    <ion-icon name="menu"></ion-icon>
+    <ion-menu-button menu="menuId"></ion-menu-button>
+  </ion-buttons>
+</ion-item>
+
 
   <ion-item>
-    <ion-icon name="chevron-forward" slot="end"></ion-icon>
 
+
+    <ion-icon name="chevron-forward" slot="end"></ion-icon>
     <ion-thumbnail style=" border-radius:100%; overflow:hidden;" slot="start">
       <img src="./assets/images/head2.png">
     </ion-thumbnail>
@@ -32,8 +36,6 @@
     </div>
   </ion-item>
   <!-- 个人基本信息 -->
-
-
 
 
   <!-- 数量栏 -->
@@ -70,20 +72,20 @@
       <ion-label>Card Link Item 1 activated</ion-label>
       <ion-icon name="chevron-forward" slot="end"></ion-icon>
     </ion-item>
-  
+
     <ion-item href="#">
       <ion-icon name="wine" slot="start"></ion-icon>
       <ion-label>Card Link Item 2</ion-label>
       <ion-icon name="chevron-forward" slot="end"></ion-icon>
     </ion-item>
-   
-    <ion-item class="ion-activated">
+
+    <ion-item href="#" class="ion-activated">
       <ion-icon name="warning" slot="start"></ion-icon>
       <ion-label>Card Button Item 1 activated</ion-label>
       <ion-icon name="chevron-forward" slot="end"></ion-icon>
     </ion-item>
-  
-    <ion-item>
+
+    <ion-item href="#">
       <ion-icon name="walk" slot="start"></ion-icon>
       <ion-label>Card Button Item 2</ion-label>
       <ion-icon name="chevron-forward" slot="end"></ion-icon>
@@ -133,9 +135,9 @@
 
 
 
-  <ion-button expand="block" color="secondary" >
+  <ion-button expand="block" color="secondary">
     退出登录
-    </ion-button>
+  </ion-button>
   <!-- 其他菜单 -->
 
 </ion-content>

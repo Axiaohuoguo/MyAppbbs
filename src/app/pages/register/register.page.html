@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" color="primary">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <form >
+
+      <ion-item>
+        <ion-label position="floating">
+          用户名
+          <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input name="name" clearInput [(ngModel)]="registerInfo.name"  required type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          密码
+          <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input name="passwod" type="password" [(ngModel)]="registerInfo.passwod" required ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          再次输入密码
+          <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input type="password" name="repasswod" [(ngModel)]="registerInfo.repasswod" required type="repasswod"></ion-input>
+      </ion-item>
+
+      <ion-item>
+
+        <ion-label position="floating">
+          手机
+          <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input name="phone" [(ngModel)]="registerInfo.phone" required type="phone"></ion-input>
+        <ion-button slot="end" (click)="getCode()" [disabled]="!verifyCode.disable">{{verifyCode.verifyCodeTips}}
+        </ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          验证码
+          <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input name="vcode" [(ngModel)]="registerInfo.vcode" required type="vcode"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          邮箱
+          <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input name="email" [(ngModel)]="registerInfo.email" required type="email"></ion-input>
+      </ion-item>
+    </form>
+  </ion-card>
+      <ion-button (click)="regOnClick()" expand="block" type="submit" shape="round">
+      注册
+    </ion-button>
+    {{registerInfo | json}}
+</ion-content>
