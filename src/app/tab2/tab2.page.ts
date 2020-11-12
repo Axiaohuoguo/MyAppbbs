@@ -7,7 +7,7 @@ import { Component,ViewChild } from '@angular/core';
 })
 export class Tab2Page {
 
-  tabState:any = "all";
+ public tabState:any = "all";
 
   //top栏dom
   @ViewChild('segment1',null) segment1 :any;
@@ -26,7 +26,8 @@ ngOnInit(): void {
   
 segmentChanged(e) {//top改变后的事件
 
-    console.log('Segment changed',e);
+    console.log('Segment changed',e.detail.value);
+    this.tabState =e.detail.value;
 
   }
 

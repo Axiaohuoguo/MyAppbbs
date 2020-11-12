@@ -1,9 +1,9 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title slot="start">个人中心</ion-title>
-
+    <ion-title>个人中心</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content>
 
@@ -67,28 +67,28 @@
 
   <!-- 其他菜单 -->
   <ion-card>
-    <ion-item href="#" class="ion-activated">
+    <ion-item href="#" >
       <ion-icon name="wifi" slot="start"></ion-icon>
       <ion-label>Card Link Item 1 activated</ion-label>
-      <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
     <ion-item href="#">
       <ion-icon name="wine" slot="start"></ion-icon>
       <ion-label>Card Link Item 2</ion-label>
-      <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
-    <ion-item href="#" class="ion-activated">
+    <ion-item href="#" >
       <ion-icon name="warning" slot="start"></ion-icon>
       <ion-label>Card Button Item 1 activated</ion-label>
-      <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
-    <ion-item href="#">
+    <ion-item [routerLink]="['/about']" >
       <ion-icon name="walk" slot="start"></ion-icon>
-      <ion-label>Card Button Item 2</ion-label>
-      <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      <ion-label>关于</ion-label>
+      <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
   </ion-card>
   <!-- <ion-list>

@@ -13,7 +13,12 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(
+    {
+      mode: 'ios',
+      backButtonText:"返回"  //配置默认的返回按钮
+    }
+  ), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -22,14 +27,16 @@ import { AppComponent } from './app.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private statusBar: StatusBar , private splashScreen: SplashScreen,private platform: Platform) {
-
+  constructor(private statusBar: StatusBar, private splashScreen: SplashScreen, private platform: Platform) {
+    // this.statusBar.overlaysWebView(true)
     this.initializeApp();
   }
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      // this.statusBar.styleDefault();
+      this.statusBar.styleLightContent
       this.splashScreen.hide();
+      // this.statusBar.overlaysWebView(true)
     });
   }
 }

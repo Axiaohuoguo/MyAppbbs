@@ -11,6 +11,7 @@ import { MyslidesModule } from '../modules/myslides/myslides.module'  //导入�
 
 @NgModule({
   imports: [
+
     IonicModule,
     CommonModule,
     FormsModule,

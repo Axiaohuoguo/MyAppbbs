@@ -1,8 +1,6 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      动态
-    </ion-title>
+    <ion-title>动态</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -31,36 +29,15 @@
   <div [ngSwitch]="tabState">
 
     <div class="con1" *ngSwitchCase="'all'">
-
-
-
-      <ion-card>
-        <ion-item>
-          <ion-thumbnail style=" border-radius:100%; overflow:hidden;" slot="start">
-            <img src="./assets/images/head2.png">
-          </ion-thumbnail>
-          <ion-label >Item Avatar</ion-label>
-        </ion-item>
-
-        <ion-card-content>
-          <ion-title slot="start">Title</ion-title>
-          This is content, without any paragraph or header tags,
-          within an ion-card-content element.
-          
-        </ion-card-content>
-
-      </ion-card>
-
-
-
+      <app-mylist [tabState]="tabState"> </app-mylist>
     </div>
 
     <div class="con2" *ngSwitchCase="'follow'">
-      关注
+      <app-mylist [tabState]="tabState"> </app-mylist>
     </div>
 
     <div class="con3" *ngSwitchCase="'other'">
-      其他
+      <app-mylist [tabState]="tabState"> </app-mylist>
     </div>
 
   </div>
