@@ -29,18 +29,18 @@
     <ion-item>
 
       <!-- 文章信息日期、阅读量 -->
-      <ion-grid  fixed>
+      <ion-grid fixed>
         <ion-row>
-          <ion-col  size="6">
+          <ion-col size="6">
             <ion-icon name="time"></ion-icon>
-            <ion-text >
-             {{articleInfo.artTime}}
+            <ion-text>
+              {{articleInfo.artTime}}
             </ion-text>
           </ion-col>
 
           <ion-col style="text-align: right;" size="6">
             <ion-icon name="eye"></ion-icon>
-            <ion-text >
+            <ion-text>
               {{articleInfo.artSee}}
             </ion-text>
           </ion-col>
@@ -50,14 +50,14 @@
     </ion-item>
     <!-- 内容，文字、图片 -->
     <ion-item *ngFor="let item of articleInfo.artContent">
-     
+
       <ion-text color="primary">
-       <p >
-         {{item.contentP}}
+        <p>
+          {{item.contentP}}
         </p>
         <ion-img *ngIf=" item.contentImg!=''" [src]="item.contentImg"></ion-img>
 
-     </ion-text>
+      </ion-text>
 
     </ion-item>
 
@@ -78,25 +78,44 @@
 
       <div *ngSwitchCase="'reply'">
         <!-- 回复列表 -->
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="./assets/images/head2.png">
-          </ion-avatar>
-          <ion-label>{{articleInfo.artAuthor}}</ion-label>
-        </ion-item>
-        <ion-text color="primary">
-          <h1>AwesomeAwesomeAwesomeAwesomeAwesomeAwesome text</h1>
-        </ion-text>
 
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="./assets/images/head2.png">
-          </ion-avatar>
-          <ion-label>{{articleInfo.artAuthor}}</ion-label>
-        </ion-item>
-        <ion-text color="primary">
-          <h1>AwesomeAwesomeAwesomeAwesomeAwesomeAwesome text</h1>
-        </ion-text>
+        <ion-card>
+          <ion-item>
+
+            <ion-avatar slot="start">
+              <img src="./assets/images/head2.png">
+            </ion-avatar>
+            <ion-label>{{articleInfo.artAuthor}}</ion-label>
+            <!-- <ion-icon name="time"></ion-icon> -->
+            <ion-text>
+              2020-22-22
+            </ion-text>
+          </ion-item>
+
+          <ion-item>
+            <ion-text color="primary">
+              文章写得不错哟哈哈哈哈哈哈哈文章写得不错哟哈哈哈哈哈哈哈
+              文章写得不错哟哈哈哈哈哈哈哈文章写得不错哟哈哈哈哈哈哈哈
+              文章写得不错哟哈哈哈哈哈哈哈文章写得不错哟哈哈哈哈哈哈哈
+              文章写得不错哟哈哈哈哈哈哈哈文章写得不错哟哈哈哈哈哈哈哈
+            </ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-button slot="end" (click)="onClick()" expand="block" fill="clear" shape="round">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+              <ion-text color="primary">
+                11
+              </ion-text>
+            </ion-button>
+            <ion-button slot="end" (click)="onClick()" expand="block" fill="clear" shape="round">
+              <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+              <ion-text color="primary">
+                11
+              </ion-text>
+            </ion-button>
+          </ion-item>
+        </ion-card>
+
 
       </div>
 
@@ -126,7 +145,7 @@
 
 
 
-<!-- {{ articleInfo | json }} -->
+  <!-- {{ articleInfo | json }} -->
 
 
 
@@ -137,32 +156,32 @@
 
 
 
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col size="4">
-            <ion-button fill="clear">
-  
-              <ion-icon name="thumbs-up-outline"></ion-icon>
-              <ion-label>11</ion-label>
-            </ion-button>
-          </ion-col>
-          <ion-col size="4">
-            <ion-button fill="clear">
-              <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-              <ion-label>11</ion-label>
-            </ion-button>
-          </ion-col>
-  
-          <ion-col size="4">
-            <ion-button fill="clear">
-              <ion-icon name="arrow-redo-outline"></ion-icon>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-  
-  
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="4">
+          <ion-button fill="clear">
 
-  
+            <ion-icon name="thumbs-up-outline"></ion-icon>
+            <ion-label>11</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col size="4">
+          <ion-button fill="clear">
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+            <ion-label>11</ion-label>
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-button fill="clear">
+            <ion-icon name="arrow-redo-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+
   </ion-toolbar>
 </ion-footer>

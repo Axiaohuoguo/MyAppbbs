@@ -4,6 +4,7 @@ import { MylistComponent } from './mylist.component';
 import { RouterModule } from '@angular/router';
 
 
+
 @NgModule({
   declarations: [MylistComponent],
   imports: [
@@ -14,4 +15,10 @@ import { RouterModule } from '@angular/router';
     MylistComponent,
   ]
 })
-export class MylistModule { }
+export class MylistModule { 
+  constructor(  ){
+
+  }
+
+
+}

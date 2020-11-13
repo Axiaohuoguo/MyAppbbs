@@ -42,8 +42,6 @@
           <ion-text color="danger">*</ion-text>
         </ion-label>
         <ion-input name="phone" [(ngModel)]="registerInfo.phone" required type="phone"></ion-input>
-        <ion-button slot="end" (click)="getCode()" [disabled]="!verifyCode.disable">{{verifyCode.verifyCodeTips}}
-        </ion-button>
       </ion-item>
 
       <ion-item>
@@ -52,6 +50,8 @@
           <ion-text color="danger">*</ion-text>
         </ion-label>
         <ion-input name="vcode" [(ngModel)]="registerInfo.vcode" required type="vcode"></ion-input>
+        <ion-button slot="end" (click)="getCode()" [disabled]="!verifyCode.disable">{{verifyCode.verifyCodeTips}}
+        </ion-button>
       </ion-item>
 
       <ion-item>

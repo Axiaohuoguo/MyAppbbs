@@ -33,10 +33,10 @@ export class AppModule {
   }
   initializeApp() {
     this.platform.ready().then(() => {
-      // this.statusBar.styleDefault();
-      this.statusBar.styleLightContent
-      this.splashScreen.hide();
-      // this.statusBar.overlaysWebView(true)
+      // // this.statusBar.styleDefault();
+      // this.statusBar.styleLightContent
+      // this.splashScreen.hide();
+      this.statusBar.overlaysWebView(true)
     });
   }
 }

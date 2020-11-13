@@ -1,7 +1,7 @@
 <ion-card #myCard>
 
   <ion-item>
-    <ion-button slot="end" expand="block" fill="clear" shape="round">
+    <ion-button (click)="presentPopover($event)" slot="end" expand="block" fill="clear" shape="round">
       <ion-icon name="chevron-down-outline"></ion-icon>
     </ion-button>
 
@@ -27,7 +27,7 @@
   </ion-card-content>
 
 
-  <ion-item-divider>
+  <ion-item>
 
 
     <ion-grid fixed>
@@ -55,7 +55,7 @@
     </ion-grid>
 
 
-  </ion-item-divider>
+  </ion-item>
 
 
 </ion-card>

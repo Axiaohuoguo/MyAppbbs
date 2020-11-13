@@ -7,6 +7,9 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 
+
+import { PublishlistmdalComponent } from '../modules/publishlistmdal/publishlistmdal.component';//发布类型选择模态框
+
 @NgModule({
   imports: [
     IonicModule,
@@ -14,6 +17,9 @@ import { TabsPage } from './tabs.page';
     FormsModule,
     TabsPageRoutingModule
   ],
-  declarations: [TabsPage]
+  declarations: [TabsPage,PublishlistmdalComponent],
+  entryComponents:[PublishlistmdalComponent]
 })
-export class TabsPageModule {}
+export class TabsPageModule {
+
+}
