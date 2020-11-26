@@ -14,4 +14,9 @@ import { MyslidesComponent } from './myslides.component';//引入组件
 })
 export class MyslidesModule {
 
+  constructor ( ){
+
+  }
+
  }
+ 

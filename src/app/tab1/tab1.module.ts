@@ -22,4 +22,7 @@ import { MyslidesModule } from '../modules/myslides/myslides.module'  //导入�
   ],
   declarations: [Tab1Page]
 })
-export class Tab1PageModule {}
+export class Tab1PageModule {
+
+  
+}

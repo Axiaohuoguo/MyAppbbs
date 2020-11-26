@@ -10,33 +10,33 @@
 
 
   <!-- 个人基本信息 -->
-<ion-item>
-  <ion-buttons slot="end">
-    <ion-icon name="menu"></ion-icon>
-    <ion-menu-button menu="menuId"></ion-menu-button>
-  </ion-buttons>
-</ion-item>
-
-
+<ion-card>
   <ion-item>
-
-
-    <ion-icon name="chevron-forward" slot="end"></ion-icon>
-    <ion-thumbnail style=" border-radius:100%; overflow:hidden;" slot="start">
-      <img src="./assets/images/head2.png">
-    </ion-thumbnail>
-
-    <div>
-      <ion-label>
-        <h3>小火锅</h3>
-        <p style="color: cornflowerblue;">lv.3</p>
-        <ion-progress-bar value="0.5"></ion-progress-bar>
-        <p>这家伙很懒什么都没留下.</p>
-      </ion-label>
-    </div>
+    <label >{{userInfo._shoolname}}</label>
+    <ion-buttons slot="end">
+      <ion-icon name="menu"></ion-icon>
+      <ion-menu-button menu="menuId"></ion-menu-button>
+    </ion-buttons>
   </ion-item>
-  <!-- 个人基本信息 -->
-
+  
+  
+    <ion-item>
+  
+  
+      <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      <ion-thumbnail style=" border-radius:100%; overflow:hidden;" slot="start">
+        <img [src]="userInfo._userheadimg">
+      </ion-thumbnail>
+  
+      <div>
+        <ion-label>
+          <h3>{{userInfo._username}}</h3>
+          <p style="color: cornflowerblue;">lv.3</p>
+          <ion-progress-bar value="0.5"></ion-progress-bar>
+          <p>{{userInfo.usersignature}}</p>
+        </ion-label>
+      </div>
+    </ion-item>
 
   <!-- 数量栏 -->
   <br>
@@ -64,30 +64,35 @@
     </div>
   </div>
   <!-- 数量栏 -->
+</ion-card>
+  <!-- 个人基本信息 -->
+
+
+
 
   <!-- 其他菜单 -->
   <ion-card>
     <ion-item href="#" >
-      <ion-icon name="wifi" slot="start"></ion-icon>
-      <ion-label>Card Link Item 1 activated</ion-label>
+      <ion-icon color="secondary" name="create" slot="start"></ion-icon>
+      <ion-label>编辑资料</ion-label>
       <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
     <ion-item href="#">
-      <ion-icon name="wine" slot="start"></ion-icon>
-      <ion-label>Card Link Item 2</ion-label>
+      <ion-icon color="secondary" name="trash-bin" slot="start"></ion-icon>
+      <ion-label>清除缓存</ion-label>
       <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
     <ion-item href="#" >
-      <ion-icon name="warning" slot="start"></ion-icon>
-      <ion-label>Card Button Item 1 activated</ion-label>
+      <ion-icon color="secondary" name="settings" slot="start"></ion-icon>
+      <ion-label>更多设置</ion-label>
       <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
-    <ion-item [routerLink]="['/about']" >
-      <ion-icon name="walk" slot="start"></ion-icon>
-      <ion-label>关于</ion-label>
+    <ion-item  [routerLink]="['/about']" >
+      <ion-icon color="secondary" name="alert-circle" slot="start"></ion-icon>
+      <ion-label>关于我们</ion-label>
       <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
   </ion-card>

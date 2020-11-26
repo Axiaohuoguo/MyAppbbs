@@ -9,14 +9,14 @@
 
 <ion-content>
   <ion-card>
-    <form >
+    <form>
 
       <ion-item>
         <ion-label position="floating">
           用户名
           <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input name="name" clearInput [(ngModel)]="registerInfo.name"  required type="text"></ion-input>
+        <ion-input name="name" clearInput [(ngModel)]="registerInfo.username" required type="text"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -24,7 +24,7 @@
           密码
           <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input name="passwod" type="password" [(ngModel)]="registerInfo.passwod" required ></ion-input>
+        <ion-input name="password" type="password" [(ngModel)]="registerInfo.password" required></ion-input>
       </ion-item>
 
       <ion-item>
@@ -32,8 +32,20 @@
           再次输入密码
           <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input type="password" name="repasswod" [(ngModel)]="registerInfo.repasswod" required type="repasswod"></ion-input>
+        <ion-input type="password" name="repassword" [(ngModel)]="registerInfo.repassword" required >
+        </ion-input>
       </ion-item>
+
+      <ion-item>
+        <ion-label>选择学校</ion-label>
+
+        <ion-select (value)="registerInfo.schoolid" name="select" [(ngModel)]="registerInfo.schoolid">
+          <ion-select-option *ngFor="let item of scoolList" [value]="item.schoolid">{{item.shoolname}}
+          </ion-select-option>
+        </ion-select>
+
+      </ion-item>
+
 
       <ion-item>
 
@@ -41,7 +53,7 @@
           手机
           <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input name="phone" [(ngModel)]="registerInfo.phone" required type="phone"></ion-input>
+        <ion-input type="number" name="phone" [(ngModel)]="registerInfo.phone" required ></ion-input>
       </ion-item>
 
       <ion-item>
@@ -63,8 +75,10 @@
       </ion-item>
     </form>
   </ion-card>
-      <ion-button (click)="regOnClick()" expand="block" type="submit" shape="round">
-      注册
-    </ion-button>
-    {{registerInfo | json}}
+  <ion-button (click)="regOnClick()" *ngIf="!bak" expand="block" type="submit" shape="round">
+    注册
+  </ion-button>
+  <ion-button  [routerLink]="[ '/login']" *ngIf="bak" expand="block" fill="clear" shape="round">
+    返回登录
+  </ion-button>
 </ion-content>

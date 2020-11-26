@@ -32,7 +32,6 @@ export class ContentPage implements OnInit {
         {contentP:'tab图标，其实就是两个图标，一个填充的和一个outline的。通过样式来切换。',contentImg:'../../assets/03.jpg'},
         {contentP:'实就是两个图标，一个填充的和一实就是两个图标，一个填充的和一实就是两个图标，一个填充的和一实就是两个图标，一个填充的和一',contentImg:'../../assets/04.jpg'},
         {contentP:'实就是两个图标，一个填充的和一',contentImg:''}
-
       ]
 
     }

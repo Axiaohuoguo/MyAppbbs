@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Http2Service } from '../../services/MyHttp2.service'
+import { NoplugService } from '../../provider/noplugService'
+import { Storage } from '@ionic/storage'
+import { CookieService } from 'ngx-cookie';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { GlobalData } from 'src/app/provider/GlobalData';
 
 // import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'; //imports
-// import { NavController } from '@ionic/angular';
-
+import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,50 +17,129 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LoginPage implements OnInit {
-  static isRemember:boolean;
-  
-  loginInfo :any={
-    username :'',
-    password:'',
-    isRemember:true
+  static isRemember: boolean;
+
+  loginInfo: any = {
+    username: '',
+    password: '',
+    isRemember: true
   }
 
-  
-// eye-off-outline <ion-icon name="eye-outline"></ion-icon>
-isShowflage = false;
-isShow:string = "eye-off-outline"
+  isShowflage = false;
+  isShow: string = "eye-off-outline"
 
-isPas:string = "password"
-isShowClick(){
+  isPas: string = "password"
+  isShowClick() {
 
-  this.isShowflage = !this.isShowflage;
-  if(!this.isShowflage){
-    this.isShow = "eye-outline";
-    this.isPas = "text"
+    this.isShowflage = !this.isShowflage;
+    if (!this.isShowflage) {
+      this.isShow = "eye-outline";
+      this.isPas = "text"
+    }
+    else {
+      this.isShow = "eye-off-outline"
+      this.isPas = "password"
+
+    }
   }
-  else{
-    this.isShow = "eye-off-outline"
-    this.isPas = "password"
+
+  constructor(
+    public storage:Storage,
+    public nav:NavController,
+    public globalData: GlobalData,
+    public http2Service: Http2Service,
+    public noplugService: NoplugService,
+    public cookieService: CookieService,
+    public http: HttpClient,
+    public router:Router
+  ) { 
+    this.getReUser()
+  }
+
+  public isEmpty(val: any) {
+    const reg = /^\s+|\s+$/g;
+    return (val == null || typeof val === 'string' && val.replace(reg, '').length == 0)
+  }
+
+  //登录按钮事件
+  onClickLogin() {
+
+
+    if (this.isEmpty(this.loginInfo.username) || this.isEmpty(this.loginInfo.password)) {
+      this.noplugService.alert("提示", "用户名、密码不能为空")
+      return;
+    }
+
+    console.log("login ...ing")
+    let api = "/user/login/"
+
+
+    let data = this.http2Service.post(api, this.loginInfo)
+    data.subscribe((a: any) => {
+      if(a.code==200){
+        let student = a.data;
+        this.globalData.userId = student.id
+        this.globalData.schoolid = student.schoolid
+        this.globalData.shoolname = student.shoolname
+        this.globalData.uid = student.uid
+        this.globalData.useremail = student.useremail
+        this.globalData.userheadimg = student.userheadimg
+        this.globalData.username = student.username
+        this.globalData.userphone = student.userphone
+        this.globalData.usersignature = student.usersignature
+        this.globalData.usertype = student.usertype
+        this.storage.set("userinfo",JSON.stringify(this.globalData))
+        this.storage.get("re_name").then(name=>{
+          if( name!=null ){
+            this.storage.remove("re_name")
+              
+          }
+        })
+        this.storage.get("re_paw").then(paw=>{
+          if( paw!=null ){
+            this.storage.remove("re_paw")
+          }
+        })
+        this.nav.navigateRoot(['tabs/tab1']);    
+        this.noplugService.showToast("登录成功.....")
+      }
+      else{
+        this.noplugService.alert(a.msg)
+      }
+      console.log(a)
+
+    })
     
-  }
-}
-  constructor() {}
+   
+
+    
 
 
-
-
-
-  submitLogin() 
-  {
-      console.log('Doing login..');
   }
 
 
   ngOnInit() {
-   
+    // this.router.onSameUrlNavigation='reload'
     console.log('Login page loaded');
+  }
+  ngAfterContentInit(): void {
+    //Called after ngOnInit when the component's or directive's content has been initialized.
+    //Add 'implements AfterContentInit' to the class.
 
-
+  }
+  getReUser(){
+    this.storage.get("re_name").then(name=>{
+      if( name!=null ){
+        this.loginInfo.username= name;
+          
+      }
+    })
+    this.storage.get("re_paw").then(paw=>{
+      if( paw!=null ){
+        this.loginInfo.password= paw;
+          
+      }
+    })
   }
 
 }
