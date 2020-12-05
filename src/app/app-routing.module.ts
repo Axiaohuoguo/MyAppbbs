@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'publish',
     loadChildren: () => import('./pages/publish/publish.module').then( m => m.PublishPageModule)
+  },
+  {
+    path: 'pulishoredit/:flag/:id',
+    loadChildren: () => import('./pages/pulishoredit/pulishoredit.module').then( m => m.PulishoreditPageModule)
   }
 ];
 @NgModule({

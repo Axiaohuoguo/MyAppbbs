@@ -29,7 +29,7 @@
   <div [ngSwitch]="tabState">
 
     <div class="con1" *ngSwitchCase="'all'">
-      <app-mylist [tabState]="tabState"> </app-mylist>
+      <app-mylist [tabState]="tabState" > </app-mylist>
     </div>
 
     <div class="con2" *ngSwitchCase="'follow'">
@@ -41,4 +41,9 @@
     </div>
 
   </div>
+  <!-- 上拉加载 -->
+  <ion-infinite-scroll threshold="25%" [disabled]="true" position="bottom" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

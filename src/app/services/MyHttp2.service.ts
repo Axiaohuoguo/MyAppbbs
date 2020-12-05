@@ -24,8 +24,6 @@ export class Http2Service {
 
   public myRequest(method: string, api: string, options): Observable<Response> {
 
-
-
     let url: string = APP_SERVE_URL + api;
 
     return new Observable(observer => {
@@ -53,6 +51,22 @@ export class Http2Service {
 
     })
   }
+  // postUpImg(api,data): Observable<Response>{
+
+  //   let option = {
+
+  //     body: data,
+  //     headers: {
+
+  //       'Access-Control-Allow-Origin': '*',
+  //     },
+  //     withCredentials:true,
+  //     // observe: 'events',
+  //     responseType:'json',
+  //   }
+  //   return this.myRequest('post', api, option);
+
+  // }
   // options: {
   //   body?: any;
   //   headers?: HttpHeaders | {

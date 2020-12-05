@@ -30,5 +30,6 @@ segmentChanged(e) {//top改变后的事件
     this.tabState =e.detail.value;
 
   }
+  
 
 }

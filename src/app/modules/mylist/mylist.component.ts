@@ -10,6 +10,8 @@ import { ListpopoverComponent } from './listpopover/listpopover.component';
 })
 export class MylistComponent implements OnInit {
 
+  public cardInfo:any;
+
   public cardType:any; //卡片类型
   public artid:any; //文章id
   @Input() tabState:any; //卡片类型
@@ -23,8 +25,17 @@ export class MylistComponent implements OnInit {
     console.log("这是list组件",this.tabState)
     
   }
-  async presentPopover(ev: any) {
-     
+  //判断当前是什么类型 all-全部 follow-关注 other-其他
+  judgeType(){
+    if(this.tabState=='all'){
+
+    }    
+  }  
+  //通过学校id获得动态列表
+  getArtListByschoolID(){
+
+  }
+  async presentPopover(ev: any) {     
     const popover = await this.popoverController.create({
       component: ListpopoverComponent,
       cssClass: 'my-custom-class',

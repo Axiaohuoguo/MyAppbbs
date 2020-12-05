@@ -14,15 +14,19 @@ import {GlobalData} from './provider/GlobalData'
 import { NoplugService} from './provider/noplugService'
 import { CookieModule } from 'ngx-cookie';
 
+// import { CKEditorModule } from '@ckeditor/ckeditor5-angular'; //富文本编辑器
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    // CKEditorModule,
     CookieModule.forRoot(),
     BrowserModule, 
     HttpClientModule,
