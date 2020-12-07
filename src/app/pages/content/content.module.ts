@@ -8,6 +8,7 @@ import { ContentPageRoutingModule } from './content-routing.module';
 
 import { ContentPage } from './content.page';
 
+
 @NgModule({
   imports: [
     CommonModule,

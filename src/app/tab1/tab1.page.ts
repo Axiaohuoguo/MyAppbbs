@@ -29,6 +29,14 @@ export class Tab1Page {
 
   //   console.log(data)
   // })
+  let list:any = [{a:1},{a:2},{a:3}]
+  for (let index = 0; index < list.length; index++) {
+   let aa = {b:5}
+    list[index].b = "8"
+    console.log(list[index])    
+    
+  }
+  console.log(list)
 
   }
 

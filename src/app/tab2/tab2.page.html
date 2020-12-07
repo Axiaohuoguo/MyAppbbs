@@ -5,6 +5,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+    <!-- 下拉刷新 -->
+    <ion-refresher slot="fixed" pullFactor="0.5"  pullMin="110" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="chevron-down-circle-outline"
+        pullingText="下拉刷新"
+        refreshingSpinner="circles"
+        refreshingText="加载中...">
+      </ion-refresher-content>
+    </ion-refresher>
+
   <!-- top导航 -->
   <!-- Icon start -->
   <ion-segment #segment1 [(ngModel)]="tabState" color="primary" (ionChange)="segmentChanged($event)">
@@ -26,10 +36,11 @@
   </ion-segment>
   <!-- top导航 -->
 
+
   <div [ngSwitch]="tabState">
 
     <div class="con1" *ngSwitchCase="'all'">
-      <app-mylist [tabState]="tabState" > </app-mylist>
+      <app-mylist [tabState]="tabState" [artList]='this'> </app-mylist>
     </div>
 
     <div class="con2" *ngSwitchCase="'follow'">
@@ -42,8 +53,14 @@
 
   </div>
   <!-- 上拉加载 -->
-  <ion-infinite-scroll threshold="25%" [disabled]="true" position="bottom" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+  <ion-infinite-scroll threshold="20%" position="bottom" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content 
+    loadingSpinner="bubbles" 
+    loadingText="正在加载更多...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
+
+  <div style="text-align: center;" *ngIf="dis">我也是有底线的...</div>
 </ion-content>
+

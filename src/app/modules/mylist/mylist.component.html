@@ -1,69 +1,192 @@
-  <!-- <div [ngSwitch]="tabState">
+  <div [ngSwitch]="tabState">
 
-    <div *ngSwitchCase="'all'">all</div>
-    <div *ngSwitchCase="'follow'">follow</div>
-    <div *ngSwitchCase="'other'">other</div>
+    <div *ngSwitchCase="'all'" >
+      
+      <ion-card #myCard class="artCard" *ngFor="let item of artList.artList">
+
+        <ion-item>
+          <ion-button (click)="presentPopover($event)" slot="end" expand="block" fill="clear" shape="round">
+            <ion-icon name="chevron-down-outline"></ion-icon>
+          </ion-button>
+      
+      
+          <ion-item>
+            <ion-avatar slot="start">
+              <img [src]="item.userheadimg">
+            </ion-avatar>
+            <ion-label>{{item.username}}</ion-label>
+          </ion-item>
+      
+      
+        </ion-item>
+      
+        <ion-card-content [routerLink]="['/content',item.id]">
+          <ion-card-title>{{item.arttitle}}</ion-card-title>
+      
+          <ion-img class="img_content" [src]="item.defaultArtImg"></ion-img>
+
+          {{item.artcontent}}
+        </ion-card-content>
+      
+      
+        <!-- 卡片的下面按钮 -->
+        <!-- <ion-item>
+      
+      
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="4">
+                <ion-button fill="clear">
+      
+                  <ion-icon name="thumbs-up-outline"></ion-icon>
+                  <ion-label>11</ion-label>
+                </ion-button>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button fill="clear">
+                  <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                  <ion-label>11</ion-label>
+                </ion-button>
+              </ion-col>
+      
+              <ion-col size="4">
+                <ion-button fill="clear">
+                  <ion-icon name="arrow-redo-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      
+      
+        </ion-item> -->
+      
+      
+      </ion-card>
+    </div>
+    <!-- 关注的动态 -->
+    <div *ngSwitchCase="'follow'"><ion-card #myCard class="artCard">
+
+      <ion-item>
+        <ion-button (click)="presentPopover($event)" slot="end" expand="block" fill="clear" shape="round">
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </ion-button>
+    
+    
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="./assets/images/head2.png">
+          </ion-avatar>
+          <ion-label>小火锅</ion-label>
+        </ion-item>
+    
+    
+      </ion-item>
+    
+      <ion-card-content [routerLink]="['/content',artid]">
+        <ion-card-title>Awesome Title</ion-card-title>
+    
+        <ion-img class="img_content" src="../../assets/02.jpg"></ion-img>
+    
+    
+        This is content, without any paragraph or header tags,
+        within an ion-card-content element.
+      </ion-card-content>
+    
+    
+      <ion-item>
+    
+    
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="4">
+              <ion-button fill="clear">
+    
+                <ion-icon name="thumbs-up-outline"></ion-icon>
+                <ion-label>11</ion-label>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4">
+              <ion-button fill="clear">
+                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                <ion-label>11</ion-label>
+              </ion-button>
+            </ion-col>
+    
+            <ion-col size="4">
+              <ion-button fill="clear">
+                <ion-icon name="arrow-redo-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    
+    
+      </ion-item>
+    
+    
+    </ion-card></div>
+    <!-- 其他动态 -->
+    <div *ngSwitchCase="'other'"><ion-card #myCard class="artCard">
+
+      <ion-item>
+        <ion-button (click)="presentPopover($event)" slot="end" expand="block" fill="clear" shape="round">
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </ion-button>
+    
+    
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="./assets/images/head2.png">
+          </ion-avatar>
+          <ion-label>小火锅</ion-label>
+        </ion-item>
+    
+    
+      </ion-item>
+    
+      <ion-card-content [routerLink]="['/content',artid]">
+        <ion-card-title>Awesome Title</ion-card-title>
+    
+        <ion-img class="img_content" src="../../assets/02.jpg"></ion-img>
+    
+    
+        This is content, without any paragraph or header tags,
+        within an ion-card-content element.
+      </ion-card-content>
+    
+    
+      <ion-item>
+    
+    
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="4">
+              <ion-button fill="clear">
+    
+                <ion-icon name="thumbs-up-outline"></ion-icon>
+                <ion-label>11</ion-label>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4">
+              <ion-button fill="clear">
+                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                <ion-label>11</ion-label>
+              </ion-button>
+            </ion-col>
+    
+            <ion-col size="4">
+              <ion-button fill="clear">
+                <ion-icon name="arrow-redo-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    
+    
+      </ion-item>
+    
+    
+    </ion-card></div>
   
-  </div> -->
+  </div>
 
-<ion-card #myCard class="artCard">
-
-  <ion-item>
-    <ion-button (click)="presentPopover($event)" slot="end" expand="block" fill="clear" shape="round">
-      <ion-icon name="chevron-down-outline"></ion-icon>
-    </ion-button>
-
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="./assets/images/head2.png">
-      </ion-avatar>
-      <ion-label>小火锅</ion-label>
-    </ion-item>
-
-
-  </ion-item>
-
-  <ion-card-content [routerLink]="['/content',artid]">
-    <ion-card-title>Awesome Title</ion-card-title>
-
-    <ion-img class="img_content" src="../../assets/02.jpg"></ion-img>
-
-
-    This is content, without any paragraph or header tags,
-    within an ion-card-content element.
-  </ion-card-content>
-
-
-  <ion-item>
-
-
-    <ion-grid fixed>
-      <ion-row>
-        <ion-col size="4">
-          <ion-button fill="clear">
-
-            <ion-icon name="thumbs-up-outline"></ion-icon>
-            <ion-label>11</ion-label>
-          </ion-button>
-        </ion-col>
-        <ion-col size="4">
-          <ion-button fill="clear">
-            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-            <ion-label>11</ion-label>
-          </ion-button>
-        </ion-col>
-
-        <ion-col size="4">
-          <ion-button fill="clear">
-            <ion-icon name="arrow-redo-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-
-  </ion-item>
-
-
-</ion-card>

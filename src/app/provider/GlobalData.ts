@@ -7,6 +7,7 @@ export class GlobalData {
     // private _authTime: number;//token认证时间
     //app更新进度.默认为0,在app升级过程中会改变
     // private _updateProgress: number = -1;
+    private _artnum: any;//文章数量
 
 
     private _userId: string;//用户id
@@ -23,6 +24,13 @@ export class GlobalData {
     private _userphone: any;
     private _usersignature: any;
 
+    public get artnum(): any {
+        return this._artnum;
+    }
+    public set artnum(value: any) {
+        this._artnum = value;
+    }
+    
     public get userphone(): any {
         return this._userphone;
     }

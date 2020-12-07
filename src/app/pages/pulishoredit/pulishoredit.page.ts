@@ -68,6 +68,10 @@ export class PulishoreditPage implements OnInit {
     let api = "/art/artpulish"
     this.http.post(api,this.artInfo).subscribe((res:any)=>{
       console.log(res)
+      if(res.code==200){
+        this.noplugService.alert("发布成功..")
+        this.nav.navigateRoot(['content/',res.data.insertId])
+      }
     })
 
   }

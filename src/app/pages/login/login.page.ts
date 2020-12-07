@@ -27,7 +27,6 @@ export class LoginPage implements OnInit {
 
   isShowflage = false;
   isShow: string = "eye-off-outline"
-
   isPas: string = "password"
   isShowClick() {
 
@@ -60,6 +59,16 @@ export class LoginPage implements OnInit {
     const reg = /^\s+|\s+$/g;
     return (val == null || typeof val === 'string' && val.replace(reg, '').length == 0)
   }
+  //下拉刷新
+  doRefresh(e){
+    this.getReUser();
+    console.log(e)
+    setTimeout(() => {
+    e.target.disabled=!true;
+    e.target.complete();
+    }, 200);
+
+  }
 
   //登录按钮事件
   onClickLogin() {
@@ -72,6 +81,11 @@ export class LoginPage implements OnInit {
 
     console.log("login ...ing")
     let api = "/user/login/"
+    this.storage.get("userinfo").then(user=>{
+      if(user!=null){
+        this.storage.remove("userinfo")
+      }
+    })
 
 
     let data = this.http2Service.post(api, this.loginInfo)
@@ -88,6 +102,8 @@ export class LoginPage implements OnInit {
         this.globalData.userphone = student.userphone
         this.globalData.usersignature = student.usersignature
         this.globalData.usertype = student.usertype
+        this.globalData.artnum = student.artnum
+
         this.storage.set("userinfo",JSON.stringify(this.globalData))
         this.storage.get("re_name").then(name=>{
           if( name!=null ){

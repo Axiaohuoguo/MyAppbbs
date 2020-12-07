@@ -15,6 +15,7 @@ export class MylistComponent implements OnInit {
   public cardType:any; //卡片类型
   public artid:any; //文章id
   @Input() tabState:any; //卡片类型
+  @Input() artList :any; //文章列表 all 的所有传值
 
   constructor(public popoverController:PopoverController) {
 
@@ -25,16 +26,12 @@ export class MylistComponent implements OnInit {
     console.log("这是list组件",this.tabState)
     
   }
-  //判断当前是什么类型 all-全部 follow-关注 other-其他
-  judgeType(){
-    if(this.tabState=='all'){
-
-    }    
-  }  
-  //通过学校id获得动态列表
-  getArtListByschoolID(){
-
+  ngAfterContentInit(): void {
+    //Called after ngOnInit when the component's or directive's content has been initialized.
+    //Add 'implements AfterContentInit' to the class.
+    // console.log('lll',this.artList.artList)
   }
+
   async presentPopover(ev: any) {     
     const popover = await this.popoverController.create({
       component: ListpopoverComponent,

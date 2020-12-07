@@ -45,11 +45,11 @@ export class NoplugService {
      * @param duration 显示时长
      */
 
-    async showToast(message: string = '操作完成', duration: number = 2000) {
+    async showToast(message: string = '操作完成', duration: number = 2000,position:any='bottom') {
         const toast = await this.toast.create({
             message: message,
             duration: duration,
-            position: 'bottom',
+            position: position,
             color: 'dark',
             // showCloseButton: false
         });

@@ -86,6 +86,10 @@ export class Utils {
             .replace(/fff/ig, String(time.Millisecond))
     }
 
+    static rTime(date) {
+        return date.setTime(date.getTime()-24*60*60*1000); 
+    }
+
     /**
      * 每次调用sequence加1
      * @type {()=>number}
