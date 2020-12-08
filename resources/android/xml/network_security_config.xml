@@ -6,5 +6,6 @@
         </trust-anchors>
         <domain includeSubdomains="true">localhost</domain>
         <domain includeSubdomains="true">39.100.108.2</domain>
+        <domain includeSubdomains="true">coolschool.ahy1.top</domain>
     </domain-config>
 </network-security-config>

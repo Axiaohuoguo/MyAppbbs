@@ -22,8 +22,7 @@ export class PublishlistmdalComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    console.log(this.navParams)
-    
+    console.log(this.navParams)    
     this.getAllType();
 
   }

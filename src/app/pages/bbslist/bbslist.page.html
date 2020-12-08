@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+      <!-- 下拉刷新 -->
+      <ion-refresher slot="fixed" pullFactor="0.5"  pullMin="110" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="chevron-down-circle-outline"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="加载中...">
+        </ion-refresher-content>
+      </ion-refresher>
+
+      
+  <app-mylist [tabState]="tabState" [artList]='this'> </app-mylist>
+
+    <!-- 上拉加载 -->
+    <ion-infinite-scroll threshold="20%" position="bottom" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content 
+      loadingSpinner="bubbles" 
+      loadingText="正在加载更多...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;" *ngIf="dis">到底啦...</div>
+</ion-content>

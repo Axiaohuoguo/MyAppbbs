@@ -53,12 +53,13 @@ export class PulishoreditPage implements OnInit {
     )
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
       console.log(loader)
-      return new FileUploadAdapter(loader,this.http);
+      // this.noplugService.showLoading()
+      return new FileUploadAdapter(loader,this.http,this.noplugService);      
     };
+   
   }
 
   ngOnInit() {
-
     this.judgeFlag();
     this. getAuthorId();
   }

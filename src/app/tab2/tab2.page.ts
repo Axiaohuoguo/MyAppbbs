@@ -37,9 +37,12 @@ export class Tab2Page {
   }
   // 下拉刷新
   doRefresh(e) {
+   
     if (this.tabState == "all") {
       this.param.page = 1;
+      
       setTimeout(() => {
+        this.artList = []
         this.getArtListByschoolID(this.param, e)
       }, 500);
       return;
@@ -88,9 +91,7 @@ export class Tab2Page {
   //去掉文字中的html标签
   atchReg(str) {
     let reg = /<\/?.+?\/?>/g;
-    // console.log(str.replace(reg, ''));
     return this.retainNmb(str.replace(reg, ''), 30)
-    // return str.replace(reg, '')
   }
 
   fondImgHtml(str: String) {
@@ -107,7 +108,7 @@ export class Tab2Page {
   //保留多少文字
   retainNmb(str: String, num: number) {
 
-    return str.substr(1, num);
+    return str.substr(1, num)+"......";
 
   }
 

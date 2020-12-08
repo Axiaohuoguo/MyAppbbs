@@ -1,17 +1,25 @@
 <ion-header class="ion-no-border">
+
   <ion-toolbar>
     <ion-title>主页</ion-title>
   </ion-toolbar>
+  <ion-searchbar color="secondary" placeholder="搜索..." animated="true" type="search"
+    (ionChange)="onSearchChange($event)" [debounce]="250">
+  </ion-searchbar>
 </ion-header>
 
 
 
 <ion-content [fullscreen]="true">
+  <!-- 下拉刷新 -->
+  <ion-refresher slot="fixed" pullFactor="1" pullMin="170" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="下拉刷新" refreshingSpinner="circles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
 
 
-  <ion-searchbar color="secondary" placeholder="搜索..." animated="true" type="search"
-    (ionChange)="onSearchChange($event)" [debounce]="250">
-  </ion-searchbar>
+
   <!-- 轮播组件 -->
   <app-myslides></app-myslides>
 
@@ -19,47 +27,15 @@
   <ion-card>
     <div class="sy_tubiao">
       <div class="sy_tu">
-        <a  class="sy_dztj">
-          <img src="assets/images/shouye/class_wnq.png" />
-          <label>万能墙</label>
-        </a>
-        <a class="sy_dztj">
-          <img src="assets/images/shouye/class_bbj.png" />
-          <label>帮帮酱</label>
-        </a>
-        <a class="sy_dztj">
-          <img src="assets/images/shouye/class_tw.png" />
-          <label>提问</label>
-        </a>
-        <a class="sy_dztj">
-          <img src="assets/images/shouye/class_xqdt.png" />
-          <label>心情动态</label>
-        </a>
-        <a class="sy_dztj">
-          <img src="assets/images/shouye/class_swzl.png" />
-          <label>失物招领</label>
-        </a>
-        <a class="sy_dztj">
-          <img src="assets/images/shouye/class_jy.png" />
-          <label>交友动态</label>
-        </a>
-  
-        <a [routerLink]="['/login']" class="sy_dztj">
-          <img src="assets/images/shouye/class_es.png" />
-          <label>二手</label>
-        </a>
-        <!-- 点击事件 -->
-        <a class="sy_dztj">
-          <img src="assets/images/shouye/class_other.png" />
-          <label>其他</label>
-        </a>
-  
+
+        <span *ngFor="let item of typeList">
+          <a class="sy_dztj" [routerLink]="[ '/bbslist', 'type' ,item.id]">
+            <img [src]="app_url+item.artimgurl" />
+            <label>{{item.artname}}</label>
+          </a>
+        </span>
       </div>
     </div>
   </ion-card>
-  
-
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
 
 </ion-content>

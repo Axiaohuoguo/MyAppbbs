@@ -33,6 +33,18 @@ const routes: Routes = [
   {
     path: 'pulishoredit/:flag/:id',
     loadChildren: () => import('./pages/pulishoredit/pulishoredit.module').then( m => m.PulishoreditPageModule)
+  },
+  {
+    path: 'moresetting',
+    loadChildren: () => import('./pages/moresetting/moresetting.module').then( m => m.MoresettingPageModule)
+  },
+  {
+    path: 'editprofile',
+    loadChildren: () => import('./pages/editprofile/editprofile.module').then( m => m.EditprofilePageModule)
+  },
+  {
+    path: 'bbslist/:flag/:key',
+    loadChildren: () => import('./pages/bbslist/bbslist.module').then( m => m.BbslistPageModule)
   }
 ];
 @NgModule({

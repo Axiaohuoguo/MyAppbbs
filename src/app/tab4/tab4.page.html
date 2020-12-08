@@ -10,24 +10,24 @@
 
 
   <!-- 个人基本信息 -->
-<ion-card>
-  <ion-item>
-    <label >{{userInfo._shoolname}}</label>
-    <ion-buttons slot="end">
-      <ion-icon name="menu"></ion-icon>
-      <ion-menu-button menu="menuId"></ion-menu-button>
-    </ion-buttons>
-  </ion-item>
-  
-  
+  <ion-card>
     <ion-item>
-  
-  
+      <label>{{userInfo._shoolname}}</label>
+      <ion-buttons slot="end">
+        <ion-icon name="menu"></ion-icon>
+        <ion-menu-button menu="menuId"></ion-menu-button>
+      </ion-buttons>
+    </ion-item>
+
+
+    <ion-item>
+
+
       <ion-icon name="chevron-forward" slot="end"></ion-icon>
       <ion-thumbnail style=" border-radius:100%; overflow:hidden;" slot="start">
         <img [src]="userInfo._userheadimg">
       </ion-thumbnail>
-  
+
       <div>
         <ion-label>
           <h3>{{userInfo._username}}</h3>
@@ -38,33 +38,33 @@
       </div>
     </ion-item>
 
-  <!-- 数量栏 -->
-  <br>
-  <div class="div_shuliang_lan">
-    <div class="div_sl_item">
-      <ion-button expand="block" fill="clear">
+    <!-- 数量栏 -->
+    <br>
+    <div class="div_shuliang_lan">
+      <div class="div_sl_item">
+        <ion-button expand="block" fill="clear">
 
-        <p>动态:</p>
-        <ion-label>{{userInfo._artnum}}</ion-label>
-      </ion-button>
-    </div>
+          <p>动态:</p>
+          <ion-label>{{userInfo._artnum}}</ion-label>
+        </ion-button>
+      </div>
 
-    <div class="div_sl_item">
-      <ion-button expand="block" fill="clear">
-        <p>关注:</p>
-        <ion-label>11</ion-label>
+      <div class="div_sl_item">
+        <ion-button expand="block" fill="clear">
+          <p>关注:</p>
+          <ion-label>11</ion-label>
 
-      </ion-button>
+        </ion-button>
+      </div>
+      <div class="div_sl_item">
+        <ion-button expand="block" fill="clear">
+          <p>粉丝:</p>
+          <ion-label>11</ion-label>
+        </ion-button>
+      </div>
     </div>
-    <div class="div_sl_item">
-      <ion-button expand="block" fill="clear">
-        <p>粉丝:</p>
-        <ion-label>11</ion-label>
-      </ion-button>
-    </div>
-  </div>
-  <!-- 数量栏 -->
-</ion-card>
+    <!-- 数量栏 -->
+  </ion-card>
   <!-- 个人基本信息 -->
 
 
@@ -72,25 +72,27 @@
 
   <!-- 其他菜单 -->
   <ion-card>
-    <ion-item href="#" >
+    <ion-item [routerLink]="[ '/editprofile' ]">
       <ion-icon color="secondary" name="create" slot="start"></ion-icon>
       <ion-label>编辑资料</ion-label>
       <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
-    <ion-item href="#">
+    <ion-item (click)="clearCache()">
+      
       <ion-icon color="secondary" name="trash-bin" slot="start"></ion-icon>
+      <!-- (click)="clearCache()" -->
       <ion-label>清除缓存</ion-label>
       <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
-    <ion-item href="#" >
+    <ion-item [routerLink]="[ '/moresetting' ]">
       <ion-icon color="secondary" name="settings" slot="start"></ion-icon>
       <ion-label>更多设置</ion-label>
       <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
-    <ion-item  [routerLink]="['/about']" >
+    <ion-item [routerLink]="['/about']">
       <ion-icon color="secondary" name="alert-circle" slot="start"></ion-icon>
       <ion-label>关于我们</ion-label>
       <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
@@ -140,7 +142,7 @@
 
 
 
-  <ion-button expand="block" color="secondary">
+  <ion-button expand="block" color="secondary" (click)="logonOut()">
     退出登录
   </ion-button>
   <!-- 其他菜单 -->

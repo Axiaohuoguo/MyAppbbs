@@ -39,6 +39,38 @@ export class NoplugService {
         await alert.present();
     }
 
+    /***
+     * 是否继续
+     */
+      async alertIscontinue(title: string,message:string="提示",ca) {
+        const alert = await this.alertCtrl.create({
+          cssClass: 'my-custom-class',
+          header: title,
+          message: message,
+          buttons: [
+            {
+              text: '取消',
+              role: 'cancel',
+              cssClass: 'secondary',
+              handler: () => {
+                // console.log('取消');
+                
+                ca(false)
+              }
+            }, {
+              text: '确定',
+              handler: () => {
+                // console.log('Okay');
+                ca(true)
+                
+              }
+            }
+          ]
+        });
+    
+         await alert.present();
+      }
+
     /**
      * 统一调用此方法显示提示信息
      * @param message 信息内容
@@ -50,8 +82,8 @@ export class NoplugService {
             message: message,
             duration: duration,
             position: position,
-            color: 'dark',
-            // showCloseButton: false
+            color: 'light',
+            // translucent:true
         });
         toast.present();
     }
