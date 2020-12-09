@@ -6,7 +6,8 @@ export class GlobalData {
     // private _refreshToken: string;//refreshToken
     // private _authTime: number;//token认证时间
     //app更新进度.默认为0,在app升级过程中会改变
-    // private _updateProgress: number = -1;
+    // private _updateProgress: number = -1;    
+
     private _artnum: any;//文章数量
 
 

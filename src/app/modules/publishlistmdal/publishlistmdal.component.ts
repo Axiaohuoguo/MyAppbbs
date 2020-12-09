@@ -3,6 +3,9 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { Http2Service } from '../../services/MyHttp2.service'
 import {APP_SERVE}from '../../provider/constant'
 import { Storage } from '@ionic/storage'
+import { NoplugService } from 'src/app/provider/noplugService';
+import { strict } from 'assert';
+
 
 @Component({
   selector: 'app-publishlistmdal',
@@ -18,13 +21,18 @@ export class PublishlistmdalComponent implements OnInit {
     public navParams:NavParams,
     public modalController:ModalController,
     public http2Service:Http2Service,
-    public storage:Storage,    
+    public storage:Storage,  
+    public noplugService:NoplugService  
     ) { }
 
   ngOnInit() {
     console.log(this.navParams)    
     this.getAllType();
-
+    this.setIsOpenMod()
+  }
+  //设置打开模态框的标志
+  setIsOpenMod(){
+    this.storage.set("isOpenMod",true)
   }
   //获得所有可用帖子类别
   getAllType(){
@@ -48,10 +56,9 @@ export class PublishlistmdalComponent implements OnInit {
   }
 
   doClose(){
-
+    this.storage.remove("isOpenMod")
     console.log("关闭模态框");
     this.modalController.dismiss({
-
       'closeValue':"值" //关闭时传递的数据
 
     });

@@ -36,7 +36,7 @@
             <ion-icon name="time"></ion-icon>
             <ion-text>
               <!-- {{articleInfo.arteditime}} -->
-              {{ articleInfo.arteditime | date:'yyyy-MM-dd HH:mm'}} 
+              {{ articleInfo.arttime | date:'yyyy-MM-dd HH:mm'}} 
             </ion-text>
           </ion-col>
 
@@ -52,6 +52,10 @@
     </ion-item>
     <ion-item >
       <span [innerHTML] ='articleInfo.artcontent'></span>      
+    </ion-item>
+    <ion-item>
+      
+      <ion-label slot="end">最后修改:{{articleInfo.arteditime | date:'MM-dd HH:mm'}} </ion-label>
     </ion-item>
     <!-- 内容，文字、图片 -->
     <!-- <ion-item *ngFor="let item of articleInfo.artContent">

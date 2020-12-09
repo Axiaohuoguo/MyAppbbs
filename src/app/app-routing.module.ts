@@ -45,6 +45,10 @@ const routes: Routes = [
   {
     path: 'bbslist/:flag/:key',
     loadChildren: () => import('./pages/bbslist/bbslist.module').then( m => m.BbslistPageModule)
+  },
+  {
+    path: 'myartlist',
+    loadChildren: () => import('./pages/myartlist/myartlist.module').then( m => m.MyartlistPageModule)
   }
 ];
 @NgModule({

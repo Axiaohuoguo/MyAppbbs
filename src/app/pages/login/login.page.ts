@@ -117,7 +117,7 @@ export class LoginPage implements OnInit {
           }
         })
         this.nav.navigateRoot(['tabs/tab1']);    
-        this.noplugService.showToast("登录成功.....")
+        this.noplugService.showToast("登录成功.....",2000,'top')
       }
       else{
         this.noplugService.alert(a.msg)
@@ -156,6 +156,20 @@ export class LoginPage implements OnInit {
           
       }
     })
+  }
+
+  isExit = true;
+  panduanExit(){
+    if(this.isExit){
+      this.noplugService.showToast("再按一次退出",2000,'top','success')
+      this.isExit = false;
+      setTimeout(() => {
+        this.isExit = true;
+      }, 2000);
+    }
+    else{      
+      navigator['app'].exitApp(); //退出APP
+    }
   }
 
 }

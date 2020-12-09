@@ -96,7 +96,7 @@ export class ContentPage implements OnInit {
 
       this.getarticleInfo(this.artid)
       this.getArtLikeList(this.artid)
-      this.noplugService.showToast(res.data.msg, 200, "middle")
+      this.noplugService.showToast(res.data.msg, 200, "top")
     }))
     this.setLikeBut()
   }
@@ -108,7 +108,7 @@ export class ContentPage implements OnInit {
     this.http.post(api, this.replyInfo).subscribe((res: any) => {
       console.log(res)
       if (res.code == 200) {
-        this.noplugService.showToast("回复成功", 300, "middle")
+        this.noplugService.showToast("回复成功", 300, "top")
         this.replyInfo.replyContent = ''
         this.getReplyinfoByArtid(this.artid)
         this.getarticleInfo(this.artid)

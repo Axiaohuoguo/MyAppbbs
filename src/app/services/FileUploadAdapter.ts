@@ -1,5 +1,6 @@
-import {APP_SERVE} from '../provider/constant'
+import {APP_SERVE, QNY_IMG_API} from '../provider/constant'
 import {QNY_SERVER} from '../provider/constant'
+
 export class FileUploadAdapter {
     
 
@@ -7,15 +8,15 @@ export class FileUploadAdapter {
     public loader: any;
     public api :any;
     public http:any;
-    public noplugService:any
-    constructor(loader:any,http:any,noplugService) {
+
+    constructor(loader:any,http:any ){
         // 初始化
         
         this.loader = loader;
         this.api = '/upload/uploadimg'   
         // this.api = '/art/updateimg'   
         this.http =http;
-        this.noplugService = noplugService
+
       }
       upload() {
        // 上传文件      
@@ -32,7 +33,7 @@ export class FileUploadAdapter {
                     console.log(data)    
                     
                     if (data.code==200){
-                        resolve({default :QNY_SERVER+ data.data.imgDir});
+                        resolve({default :QNY_SERVER+ data.data.imgDir+QNY_IMG_API});
                     }else{
                         reject(data.msg); 
                     }

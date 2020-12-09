@@ -2,14 +2,16 @@
 
 
 /*-----后台Api地址-*/
-export const APP_SERVE_URL = 'http://localhost:8888/api'; //  测试用
-// export const APP_SERVE_URL = 'http://39.100.108.2/api'; // 
+// export const APP_SERVE_URL = 'http://localhost:8888/api'; //  测试用
+export const APP_SERVE_URL = 'http://39.100.108.2/api'; // 
 //后台地址
-export const APP_SERVE = "http://localhost:8888"//测试用
-// export const APP_SERVE = "http://39.100.108.2"//
+// export const APP_SERVE = "http://localhost:8888"//测试用
+export const APP_SERVE = "http://39.100.108.2"//
 
 export const QNY_SERVER = "http://coolschool.ahy1.top/"//七牛云链接
 
+//七牛云图片处理接口
+export const QNY_IMG_API = "\?imageView2/0/format/png/q/47|watermark/2/text/Q29vbFNjaG9vbA==/font/5qW35L2T/fontsize/800/fill/IzFCQTZENg==/dissolve/76/gravity/SouthEast/dx/10/dy/10"
 
 
 /*----------------------------------------app版本升级服务地址----------------------------------------*/

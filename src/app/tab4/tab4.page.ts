@@ -54,6 +54,7 @@ export class Tab4Page implements OnInit {
         //清除本地缓存和cookie
         this.cookieService.removeAll()
         this.storage.clear()
+        this.nav.navigateRoot(['./login'])
       }
       else return
     })

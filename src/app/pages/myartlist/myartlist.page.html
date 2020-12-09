@@ -1,0 +1,54 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>myartlist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+      <!-- 下拉刷新 -->
+      <ion-refresher slot="fixed" pullFactor="0.5"  pullMin="60" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="chevron-down-circle-outline"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="加载中...">
+        </ion-refresher-content>
+      </ion-refresher>
+
+  <ion-card *ngFor="let item of artList">
+    <ion-card-content>
+
+      <ion-item [routerLink]="[ '/content', item.id ]">
+        <ion-card-title>
+          {{item.arttitle}}
+        </ion-card-title>
+       
+      </ion-item>
+
+      <ion-item>
+        <ion-buttons slot="end">
+          <ion-button (click)="onDelete(item.id)" expand="block" shape="round">
+            删除
+          </ion-button>
+          <ion-button [routerLink]="[ '/pulishoredit','edit',item.id ]" expand="block" shape="round">
+            编辑
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+
+    <!-- 上拉加载 -->
+    <ion-infinite-scroll threshold="20%" position="bottom" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content 
+      loadingSpinner="bubbles" 
+      loadingText="正在加载更多...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;" *ngIf="dis">到底罗...</div>
+</ion-content>

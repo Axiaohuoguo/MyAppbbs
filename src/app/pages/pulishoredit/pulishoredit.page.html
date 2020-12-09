@@ -9,21 +9,39 @@
 </ion-header>
 
 <ion-content>
+
   <ion-item>
     <ion-label>标题</ion-label>
     <ion-input [(ngModel)]="artInfo.artTitle"></ion-input>
   </ion-item>
 
+  <ion-item *ngIf="!pageType">    
+    <ion-label>选择修改类别</ion-label>
+    <ion-select (value)="artInfo.typeId" name="select" [(ngModel)]="artInfo.typeId">
+      <ion-select-option *ngFor="let item of typeList" [value]="item.id">{{item.artname}}
+      </ion-select-option>
+    </ion-select>
+
+  </ion-item>
+
   <ckeditor  [(ngModel)]="artInfo.editorData"  [config]='config' [editor]="Editor" data=" " (ready)="onReady($event)"></ckeditor>
-{{ artInfo | json }}
+<span>
+  {{ artInfo | json }}
+</span>
 
 </ion-content>
 <ion-footer>
   <ion-toolbar>
     
-    <ion-button (click)="onPulish()" expand="block"  shape="round">
+    <ion-button *ngIf="pageType" (click)="onPulish()" expand="block"  shape="round">
       <ion-icon name="paper-plane-sharp" ></ion-icon>
       发布
     </ion-button>
+
+    <ion-button *ngIf="!pageType" (click)="onEdit()" expand="block"  shape="round">
+      <ion-icon name="paper-plane-sharp" ></ion-icon>
+      修改
+    </ion-button>
+
   </ion-toolbar>
 </ion-footer>

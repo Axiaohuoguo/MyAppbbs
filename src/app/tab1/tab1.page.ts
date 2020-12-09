@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Http2Service } from '../services/MyHttp2.service'
 import { Storage } from '@ionic/storage'
 import { APP_SERVE } from '../provider/constant';
+import { NoplugService } from '../provider/noplugService';
 
 @Component({
   selector: 'app-tab1',
@@ -11,12 +12,12 @@ import { APP_SERVE } from '../provider/constant';
 export class Tab1Page {
   typeList: any = [];//类别列表
   app_url: string = APP_SERVE; //服务器地址
-
   options: any = {
   }
   constructor(
     public http2Service: Http2Service,
-    public storage: Storage
+    public storage: Storage,
+    public noplugService:NoplugService
   ) {
 
 
@@ -57,7 +58,9 @@ export class Tab1Page {
     })
   }
   ngOnInit(): void {
+
     this.getAllType(null);
   }
+ 
 
 }

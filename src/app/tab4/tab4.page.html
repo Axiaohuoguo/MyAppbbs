@@ -42,8 +42,8 @@
     <br>
     <div class="div_shuliang_lan">
       <div class="div_sl_item">
-        <ion-button expand="block" fill="clear">
-
+        <!-- <a [routerLink]="[ '/myartlist' ]">name</a> -->
+        <ion-button [routerLink]="[ '/myartlist' ]" expand="block" fill="clear">
           <p>动态:</p>
           <ion-label>{{userInfo._artnum}}</ion-label>
         </ion-button>
@@ -52,14 +52,14 @@
       <div class="div_sl_item">
         <ion-button expand="block" fill="clear">
           <p>关注:</p>
-          <ion-label>11</ion-label>
+          <ion-label>00</ion-label>
 
         </ion-button>
       </div>
       <div class="div_sl_item">
         <ion-button expand="block" fill="clear">
           <p>粉丝:</p>
-          <ion-label>11</ion-label>
+          <ion-label>00</ion-label>
         </ion-button>
       </div>
     </div>

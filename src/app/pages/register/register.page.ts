@@ -100,7 +100,7 @@ export class RegisterPage implements OnInit {
       else{
         this.storage.set("re_name",this.registerInfo.username)
         this.storage.set("re_paw",this.registerInfo.password)
-        this.noplugService.showToast("注册成功..");
+        this.noplugService.showToast("注册成功..",2000,'top');
         this.bak = !this.bak;
       }
 
