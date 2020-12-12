@@ -49,6 +49,14 @@ const routes: Routes = [
   {
     path: 'myartlist',
     loadChildren: () => import('./pages/myartlist/myartlist.module').then( m => m.MyartlistPageModule)
+  },
+  {
+    path: 'perfile/:userid',
+    loadChildren: () => import('./pages/perfile/perfile.module').then( m => m.PerfilePageModule)
+  },
+  {
+    path: 'friendlist/:flag',
+    loadChildren: () => import('./pages/friendlist/friendlist.module').then( m => m.FriendlistPageModule)
   }
 ];
 @NgModule({

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>friendlist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div *ngIf="isfollowPage">
+  <ion-list  *ngFor="let item of userList">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="item.userheadimg">
+      </ion-avatar>
+      <ion-label [routerLink]=" [ '/perfile', item.myuserid ]" >{{item.username}}</ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+<div *ngIf="!isfollowPage">
+  <ion-list  *ngFor="let item of userList">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="item.userheadimg">
+      </ion-avatar>
+      <ion-label [routerLink]=" [ '/perfile', item.fansid ]" >{{item.username}}</ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+
+
+</ion-content>

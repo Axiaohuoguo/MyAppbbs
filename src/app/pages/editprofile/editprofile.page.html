@@ -1,12 +1,90 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>编辑个人资料</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-编辑资料
+
+  <div *ngIf="!isEditPawss">
+    <div class="div_head" (click)="onSheet()">
+      <img [src]="userInfo.userheadimg">
+    </div>  
+
+    <input hidden type="file" id="inputfile"
+     (change)="onchangeIng($event)" 
+     accept="image/gif,image/png, image/jpeg"/>
+
+    <ion-item>
+      <ion-label >
+        用户名:
+      </ion-label>
+      <ion-input name="username" [(ngModel)]="userInfo.username" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>账号: {{userInfo.uid}}</ion-label>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label >
+        签名:
+      </ion-label>
+      <ion-input name="usersignature" [(ngModel)]="userInfo.usersignature"  type="text"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label >
+        邮箱:
+      </ion-label>
+      <ion-input name="email" [(ngModel)]="userInfo.useremail"  type="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+  
+      <ion-label >
+        手机:
+      </ion-label>
+      <ion-input type="number" [(ngModel)]="userInfo.userphone" name="phone"></ion-input>
+    </ion-item>
+  </div>
+
+
+
+  <ion-button (click)="isEditP()" expand="block" fill="clear" shape="round">
+    <span *ngIf="!isEditPawss">修改密码？</span>
+    <span *ngIf="isEditPawss">返回资料修改</span>
+  </ion-button>
+  <div *ngIf="isEditPawss">
+
+    <ion-item>
+      <ion-label  position="floating">原密码</ion-label>
+      <ion-input name="password" [(ngModel)]="userPainfo.password" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">新密码: </ion-label>
+      <ion-input  name="newpassword" [(ngModel)]="userPainfo.newpassword"  type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label  position="floating">确认新密码: </ion-label>
+      <ion-input name="renewpassword"  [(ngModel)]="userPainfo.renewpassword" type="text"></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-button *ngIf="!isEditPawss" (click)="onComEdit()" expand="block" shape="round">
+    修改资料
+  </ion-button>
+  
+  <ion-button *ngIf="isEditPawss" (click)="onComEditPaw()" expand="block" shape="round">
+    修改密码
+  </ion-button>
+
+
+
+
+
 </ion-content>

@@ -20,11 +20,13 @@
     </ion-list-header> -->
 
     <!-- 作者头像和昵称 -->
+    
     <ion-item>
       <ion-avatar slot="start">
         <img [src]="articleInfo.userheadimg">
       </ion-avatar>
-      <ion-label>{{articleInfo.username}}</ion-label>
+
+      <ion-label [routerLink]=" [ '/perfile', articleInfo.userid ]" >{{articleInfo.username}}</ion-label>
     </ion-item>
     <ion-item>
 
@@ -51,7 +53,7 @@
 
     </ion-item>
     <ion-item >
-      <span [innerHTML] ='articleInfo.artcontent'></span>      
+      <p class="ck-content" [innerHTML] ='articleInfo.artcontent'></p>      
     </ion-item>
     <ion-item>
       
@@ -92,9 +94,9 @@
           <ion-item >
 
             <ion-avatar slot="start">
-              <img src="./assets/images/head2.png">
+              <img [src]="item.userheadimg">
             </ion-avatar>
-            <ion-label>{{item.username}}</ion-label>
+            <ion-label [routerLink]=" [ '/perfile', item.replyuserid ]" >{{item.username}}</ion-label>
             <!-- <ion-icon name="time"></ion-icon> -->
             <ion-text>
               {{ item.replytime | date:'yyyy-MM-dd HH:mm'}} 
@@ -134,7 +136,7 @@
             <ion-avatar slot="start">
               <img [src]="item.userheadimg">
             </ion-avatar>
-            <ion-label>{{item.username}}</ion-label>
+            <ion-label [routerLink]=" [ '/perfile', item.likeuserid ]" >{{item.username}}</ion-label>
           </ion-item>
         </ion-list>
       </div>

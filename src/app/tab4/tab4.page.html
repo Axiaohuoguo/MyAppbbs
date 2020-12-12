@@ -6,7 +6,12 @@
 
 
 <ion-content>
-
+  <!-- 下拉刷新 -->
+  <ion-refresher slot="fixed" pullFactor="1" pullMin="100" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="下拉刷新" refreshingSpinner="circles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
 
 
   <!-- 个人基本信息 -->
@@ -50,16 +55,17 @@
       </div>
 
       <div class="div_sl_item">
-        <ion-button expand="block" fill="clear">
+        <ion-button [routerLink]="[ '/friendlist', 'follow' ]" expand="block" fill="clear">
           <p>关注:</p>
-          <ion-label>00</ion-label>
+          
+          <ion-label >{{follownum}}</ion-label>
 
         </ion-button>
       </div>
       <div class="div_sl_item">
-        <ion-button expand="block" fill="clear">
+        <ion-button [routerLink]="[ '/friendlist', 'fans' ]" expand="block" fill="clear">
           <p>粉丝:</p>
-          <ion-label>00</ion-label>
+          <ion-label >{{fansnum}}</ion-label>
         </ion-button>
       </div>
     </div>

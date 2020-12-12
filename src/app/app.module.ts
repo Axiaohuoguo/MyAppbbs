@@ -13,15 +13,14 @@ import { CookieModule } from 'ngx-cookie';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Storage } from '@ionic/storage'
-
-
-
-
+import { NavController } from '@ionic/angular';
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    // CKEditorModule,
+    // CKEditorModule,    
     CookieModule.forRoot(),
     BrowserModule,
     HttpClientModule,
@@ -33,6 +32,8 @@ import { Storage } from '@ionic/storage'
       }
     ), AppRoutingModule],
   providers: [
+    ImageResizer,
+    Camera,
     NoplugService,
     GlobalData,
     Http2Service,
@@ -50,7 +51,9 @@ export class AppModule {
     public router: Router,
     public noplugService: NoplugService,
     public modalController: ModalController,
-    public storage:Storage
+    public storage:Storage,
+    public nav:NavController
+    
   ) {
     this.initializeApp();
     this.backButtonEvent();
@@ -64,15 +67,21 @@ export class AppModule {
 
   backButtonEvent() {
 
-    this.platform.backButton.subscribe(() => {
+    this.platform.backButton.subscribe(() => { 
+
+      if((this.router.url).search("/content") !=-1){
+        this.nav.back()        
+      }
       if (this.router.url == '/tabs/tab1'
         || this.router.url == '/tabs/tab2'
         || this.router.url == '/tabs/tab3'
         || this.router.url == '/tabs/tab4'
         || this.router.url == '/login'
+        
         ) {
         this.storage.get("isOpenMod").then(dat=>{
-          if(dat==null){
+          console.log(dat)
+          if(dat==undefined || dat == null || dat == ""){
             this.panduanExit();
           }
         })

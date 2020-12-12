@@ -103,6 +103,10 @@ export class ContentPage implements OnInit {
   //提交回复
   onReply() {
     console.log(this.replyInfo)
+    if((this.replyInfo.replyContent).length<5 || (this.replyInfo.replyContent).length>50){
+      this.noplugService.alert("评论字数5-50字之间")      
+      return
+    }
     // this.replyBut = !this.replyBut;
     let api = "/art/replyart"
     this.http.post(api, this.replyInfo).subscribe((res: any) => {

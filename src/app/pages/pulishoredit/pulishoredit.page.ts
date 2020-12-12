@@ -3,14 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage'
 import { Http2Service } from '../../services/MyHttp2.service'
-
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn.js';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { FileUploadAdapter } from '../../services/FileUploadAdapter'
 import { NoplugService } from '../../provider/noplugService'
 import { GlobalData } from '../../provider/GlobalData';
-import { title } from 'process';
+
 
 @Component({
   selector: 'app-pulishoredit',
@@ -51,9 +50,12 @@ export class PulishoreditPage implements OnInit {
     public http: Http2Service,
     public noplugService: NoplugService,
     public globalData: GlobalData,
-    public loading: LoadingController
+    public loading: LoadingController,
   ) { }
 
+  myImg(){
+
+  }
   onReady(editor) {
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
@@ -62,14 +64,18 @@ export class PulishoreditPage implements OnInit {
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
       console.log(loader)
 
-      this.noplugService.showLoading("图片处理ing")
+      this.noplugService.showLoading("图片处理ing",100000)
 
       let date = new FileUploadAdapter(loader, this.http)
-
       date.upload().then((dat: any) => {
-        if (dat.default != null) {
+        if (dat.default != null || dat.default != undefined) {
           this.loading.dismiss()
         }
+        else{
+
+          this.noplugService.alert("图片上传失败...")
+        }
+
       })
       return date;
 
@@ -86,6 +92,8 @@ export class PulishoreditPage implements OnInit {
   atchReg(str) {
     let reg = /<\/?.+?\/?>/g;
     return str.replace(reg, '')
+
+
   }
   //发布按钮
   onPulish() {

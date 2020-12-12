@@ -4,7 +4,7 @@ import { Http2Service } from '../../services/MyHttp2.service'
 import { NoplugService } from '../../provider/noplugService'
 import { Storage } from '@ionic/storage'
 import { NavController } from '@ionic/angular';
-import { PAGE_SIZE } from 'src/app/provider/constant';
+import { PAGE_SIZE } from '../../provider/constant';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -180,9 +180,6 @@ export class BbslistPage implements OnInit {
   }
   // 上拉加载
   loadData(e){
-    console.log(this.param)
-    console.log("------------")
-    console.log(e);
     this.param.page++
     this.getArtListByClassid(this.param, e)
 

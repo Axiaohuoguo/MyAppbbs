@@ -14,7 +14,7 @@
             <ion-avatar slot="start">
               <img [src]="item.userheadimg">
             </ion-avatar>
-            <ion-label>{{item.username}}</ion-label>
+            <ion-label [routerLink]=" [ '/perfile', item.userid ]">{{item.username}}</ion-label>
           </ion-item>
       
       

@@ -3,9 +3,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { Http2Service } from '../../services/MyHttp2.service'
 import {APP_SERVE}from '../../provider/constant'
 import { Storage } from '@ionic/storage'
-import { NoplugService } from 'src/app/provider/noplugService';
-import { strict } from 'assert';
-
+import { NoplugService } from '../../provider/noplugService';
 
 @Component({
   selector: 'app-publishlistmdal',
@@ -54,7 +52,10 @@ export class PublishlistmdalComponent implements OnInit {
      
     })
   }
-
+  ionViewWillLeave(){
+    console.log("关闭模态框");
+    this.storage.remove("isOpenMod")
+  }
   doClose(){
     this.storage.remove("isOpenMod")
     console.log("关闭模态框");

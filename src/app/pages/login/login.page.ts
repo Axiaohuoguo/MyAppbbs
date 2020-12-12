@@ -4,7 +4,7 @@ import { NoplugService } from '../../provider/noplugService'
 import { Storage } from '@ionic/storage'
 import { CookieService } from 'ngx-cookie';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { GlobalData } from 'src/app/provider/GlobalData';
+import { GlobalData } from '../../provider/GlobalData';
 
 // import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'; //imports
 import { NavController } from '@ionic/angular';

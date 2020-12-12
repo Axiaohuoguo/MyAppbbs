@@ -4,7 +4,7 @@ import { Http2Service } from '../../services/MyHttp2.service'
 import { NoplugService } from '../../provider/noplugService'
 import { GlobalData } from '../../provider/GlobalData';
 import { LoadingController, NavController } from '@ionic/angular';
-import { PAGE_SIZE } from '../../provider/constant';
+import { MY_PAGE_SIZE } from '../../provider/constant';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ export class MyartlistPage implements OnInit {
   public artList: any = []
   public param: any = {
     page: 1,
-    size: PAGE_SIZE * 2,
+    size: MY_PAGE_SIZE,
     userid: null
   }
   constructor(
@@ -33,39 +33,44 @@ export class MyartlistPage implements OnInit {
 
   ngOnInit() {
     this.getDefault()
+    console.log(this.param)
 
   }
 
 
   getMyArtlistByuserid(param, e) {
+    
+    console.log("请求",param)
     let api = "/art/selecartlistbyuserid"
     this.http.get(api, param).subscribe((res: any) => {
+
       this.lenth = res.data.length;
+      if(e == null){
+        this.dis = false;
+
+      }
       if (e != null) {
         e.target.complete();
       }
-      if (res.data.length < PAGE_SIZE) {
+      if (e != null && res.data.length < MY_PAGE_SIZE) {
         console.log("我也是有底线的..")
         this.dis = true;
-        e.target.disabled = true;
-        // e.target.complete();          
+        // e.target.disabled = true;     
       }
       for (let index = 0; index < res.data.length; index++) {
         this.artList.push(res.data[index])
       }
-      // this.artList = res.data;
-
-      console.log(res)
+      // console.log(res)
 
     })
 
 
   }
+
   //默认数据
   getDefault() {
     this.getUserId().subscribe((res: Number) => {
       console.log("----------", res)
-
       if (res != null) {
         this.param.userid = res
         this.getMyArtlistByuserid(this.param, null)
@@ -88,41 +93,6 @@ export class MyartlistPage implements OnInit {
 
 
   }
-  //删除按钮
-  onDelete(e) {
-    this.noplugService.alertIscontinue("删除!", "确定删除此条帖子", call => {
-      if (call) {
-        let api = "/art/deleteartbyid"
-        let par = { "artid": e }
-
-        this.http.get(api, par).subscribe((res: any) => {
-          console.log(res)
-
-          if (res.code == 200) {
-
-            for (let index = 0; index < this.artList.length; index++) {
-              if (this.artList[index].id == e) {
-                this.artList.splice(index, 1)
-              }
-
-            }
-            this.noplugService.alert("删除成功")
-
-            return
-          } else {
-            this.noplugService.alert(res.msg)
-            return
-          }
-
-        })
-
-      }
-      else {
-        return;
-      }
-    })
-  }
-
   //加载更多
   loadData(e) {
     console.log(this.param)
@@ -130,23 +100,52 @@ export class MyartlistPage implements OnInit {
     console.log(e);
     this.param.page++
     this.getMyArtlistByuserid(this.param, e)
-
   }
 
   //刷新
   doRefresh(e) {
+    // e.target.complete();
+    // e.target.disabled = true;
     this.param.page = 1;
+    
     setTimeout(() => {
       this.artList = []
-
-      this.getMyArtlistByuserid(this.param, e)
-
-      e.target.disabled = !true;
-      e.target.complete();
+      this.getMyArtlistByuserid(this.param, e)      
     }, 1000);
-
-
-
-
   }
+
+    //删除按钮
+    onDelete(e) {
+      this.noplugService.alertIscontinue("删除!", "确定删除此条帖子", call => {
+        if (call) {
+          let api = "/art/deleteartbyid"
+          let par = { "artid": e }
+  
+          this.http.get(api, par).subscribe((res: any) => {
+            console.log(res)
+  
+            if (res.code == 200) {
+  
+              for (let index = 0; index < this.artList.length; index++) {
+                if (this.artList[index].id == e) {
+                  this.artList.splice(index, 1)
+                }
+  
+              }
+              this.noplugService.alert("删除成功")
+  
+              return
+            } else {
+              this.noplugService.alert(res.msg)
+              return
+            }
+  
+          })
+  
+        }
+        else {
+          return;
+        }
+      })
+    }
 }

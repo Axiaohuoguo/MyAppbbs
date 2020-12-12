@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>TA的资料</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div>
+
+    <div class="div_head">
+      <img [src]="userInfo.userheadimg">
+    </div>
+    <!-- fill="clear" -->
+    <ion-button *ngIf="!isFollow" (click)="onFollow()" fill="solid" expand="block" shape="round">
+      <ion-icon name="add-outline"></ion-icon>
+      关注
+    </ion-button>
+    <ion-button *ngIf="isFollow" (click)="onnuFollow()" expand="block" fill="clear" shape="round">
+      <ion-icon name="checkmark-outline"></ion-icon>
+      取消关注
+    </ion-button>
+
+    <ion-item>
+      <ion-label>
+        用户名:{{userInfo.username}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>账号: {{userInfo.uid}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        签名:{{userInfo.usersignature}}
+      </ion-label>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        邮箱:{{userInfo.useremail}}
+      </ion-label>
+
+    </ion-item>
+
+
+  </div>
+</ion-content>
