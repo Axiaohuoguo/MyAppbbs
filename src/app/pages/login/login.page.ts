@@ -90,7 +90,13 @@ export class LoginPage implements OnInit {
 
     let data = this.http2Service.post(api, this.loginInfo)
     data.subscribe((a: any) => {
+      if(a.code==200 && a.data.usertype == "-1"){
+        this.noplugService.alert("账号被禁用！！清联系管理员！！") 
+        this.nav.navigateRoot(['./login']);
+        return    
+      } 
       if(a.code==200){
+
         let student = a.data;
         this.globalData.userId = student.id
         this.globalData.schoolid = student.schoolid

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>提交管理申请</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-item>
+  <ion-label>申请理由</ion-label>
+  <ion-textarea [(ngModel)]="suinfo.content" rows="6" cols="20" placeholder="在这里输入申请理由6-30字...."></ion-textarea>
+</ion-item>
+  <ion-button (click)="onSubmit()" expand="block"  shape="round">
+    提交申请
+  </ion-button>
+</ion-content>

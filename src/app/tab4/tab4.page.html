@@ -18,6 +18,7 @@
   <ion-card>
     <ion-item>
       <label>{{userInfo._shoolname}}</label>
+      <label style="color:darkorange;">[{{myIdent}}]</label>
       <ion-buttons slot="end">
         <ion-icon name="menu"></ion-icon>
         <ion-menu-button menu="menuId"></ion-menu-button>
@@ -35,13 +36,15 @@
 
       <div>
         <ion-label>
-          <h3>{{userInfo._username}}</h3>
+           <h3>{{userInfo._username}}</h3>          
           <p style="color: cornflowerblue;">lv.3</p>
           <ion-progress-bar value="0.5"></ion-progress-bar>
           <p>{{userInfo._usersignature}}</p>
         </ion-label>
       </div>
+
     </ion-item>
+
 
     <!-- 数量栏 -->
     <br>
@@ -84,12 +87,21 @@
       <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
-    <ion-item (click)="clearCache()">
-      
+    
+    <ion-item [routerLink]="[ '/applyfora' ]">
+      <ion-icon color="secondary" name="terminal" slot="start"></ion-icon>
+      <ion-label>申请成为管理</ion-label>           
+    </ion-item>
+
+
+    <ion-item *ngIf="isShow" [routerLink]="[ '/auditsetting' ]">
+      <ion-icon  color="secondary" name="reader" slot="start"></ion-icon>
+      <ion-label>审核管理</ion-label>     
+    </ion-item>
+
+    <ion-item (click)="clearCache()">      
       <ion-icon color="secondary" name="trash-bin" slot="start"></ion-icon>
-      <!-- (click)="clearCache()" -->
       <ion-label>清除缓存</ion-label>
-      <!-- <ion-icon name="chevron-forward" slot="end"></ion-icon> -->
     </ion-item>
 
     <ion-item [routerLink]="[ '/moresetting' ]">

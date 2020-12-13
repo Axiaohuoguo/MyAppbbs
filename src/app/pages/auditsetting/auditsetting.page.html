@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>审核管理</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-segment [(ngModel)]="tabState" value="pizza" (ionChange)="segmentChanged($event)">
+
+      <ion-segment-button value="dtsh">
+        <ion-label>动态审核</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button *ngIf="isSuper" value="glsh">
+        <ion-label>管理员审核</ion-label>
+      </ion-segment-button>
+
+    </ion-segment>
+  </ion-item>
+  <div [ngSwitch]="tabState">
+    <div *ngSwitchCase="'dtsh'">
+
+      <!-- 文章审核 -->
+     <ion-list>
+
+        <ion-card *ngFor="let item of artList">
+          <ion-item [routerLink]="[ '/content', item.id ]">
+            <ion-label>{{item.arttitle}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-buttons slot="end">
+              <ion-button (click)="onTongguoArt(item.id)">
+                <ion-icon name="checkmark-outline"></ion-icon>
+                通过
+              </ion-button>
+              <ion-button (click)="onBohuiArt(item.id)">
+                <ion-icon name="close-outline"></ion-icon>
+                驳回
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+
+        </ion-card>
+
+      </ion-list>
+    </div>
+
+    <div *ngSwitchCase="'glsh'">
+      <!-- 管理员审核 -->
+      <ion-list >
+
+        <ion-card *ngFor="let item of adminList">
+          <ion-item [routerLink]=" [ '/perfile', item.userid ]">
+            
+            <p >{{item.content}}</p>
+          </ion-item>
+          <ion-item>
+            <ion-buttons slot="end">
+              <ion-button (click)="onTongguoAdmin(item.userid)">
+                <ion-icon name="checkmark-outline"></ion-icon>
+                通过
+              </ion-button>
+              <ion-button (click)="onBohuiAdmin(item.userid)">
+                <ion-icon name="close-outline"></ion-icon>
+                驳回
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+
+        </ion-card>
+
+      </ion-list>
+    </div>
+
+  </div>
+
+
+
+
+</ion-content>

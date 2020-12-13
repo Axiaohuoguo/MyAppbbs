@@ -57,6 +57,14 @@ const routes: Routes = [
   {
     path: 'friendlist/:flag',
     loadChildren: () => import('./pages/friendlist/friendlist.module').then( m => m.FriendlistPageModule)
+  },
+  {
+    path: 'auditsetting',
+    loadChildren: () => import('./pages/auditsetting/auditsetting.module').then( m => m.AuditsettingPageModule)
+  },
+  {
+    path: 'applyfora',
+    loadChildren: () => import('./pages/applyfora/applyfora.module').then( m => m.ApplyforaPageModule)
   }
 ];
 @NgModule({

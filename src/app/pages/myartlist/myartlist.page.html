@@ -29,12 +29,13 @@
        
       </ion-item>
 
+
       <ion-item>
-        <ion-buttons slot="end">
-          <ion-button (click)="onDelete(item.id)" expand="block" shape="round">
+        <ion-buttons  slot="end">
+          <ion-button (click)="onDelete(item.id)"  shape="round">
             删除
           </ion-button>
-          <ion-button [routerLink]="[ '/pulishoredit','edit',item.id ]" expand="block" shape="round">
+          <ion-button [routerLink]="[ '/pulishoredit','edit',item.id ]"  shape="round">
             编辑
           </ion-button>
         </ion-buttons>

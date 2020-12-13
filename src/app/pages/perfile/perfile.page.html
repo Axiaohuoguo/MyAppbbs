@@ -16,13 +16,21 @@
       <img [src]="userInfo.userheadimg">
     </div>
     <!-- fill="clear" -->
+<ion-label color="warning"  *ngIf="!butFlag">ta的账号已经被禁用</ion-label>
     <ion-button *ngIf="!isFollow" (click)="onFollow()" fill="solid" expand="block" shape="round">
       <ion-icon name="add-outline"></ion-icon>
       关注
     </ion-button>
+
     <ion-button *ngIf="isFollow" (click)="onnuFollow()" expand="block" fill="clear" shape="round">
       <ion-icon name="checkmark-outline"></ion-icon>
       取消关注
+    </ion-button>
+
+    <ion-button *ngIf="isAdmin" (click)="onFreezeta()" expand="block" shape="round">
+     <p *ngIf="butFlag">禁用ta的账号</p>
+     <p *ngIf="!butFlag">激活ta的账号</p>
+
     </ion-button>
 
     <ion-item>

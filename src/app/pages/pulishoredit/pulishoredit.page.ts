@@ -114,7 +114,13 @@ export class PulishoreditPage implements OnInit {
       console.log(res)
       if (res.code == 200) {
         this.loading.dismiss()
-        this.noplugService.alert("发布成功..")        
+        let tip ;
+        if(this.artInfo.typeId == 1||this.artInfo.typeId==6|| this.artInfo.typeId==7){
+          tip ="发布成功..!等待管理员审核"
+        }
+        else{tip = "发布成功.."}
+        this.noplugService.alert(tip)
+        
         this.nav.navigateRoot(['content/', res.data.insertId])
       }
       else{
