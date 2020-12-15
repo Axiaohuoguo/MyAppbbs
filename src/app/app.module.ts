@@ -16,6 +16,7 @@ import { Storage } from '@ionic/storage'
 import { NavController } from '@ionic/angular';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx'; 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,6 +33,7 @@ import { Camera } from '@ionic-native/camera/ngx';
       }
     ), AppRoutingModule],
   providers: [
+    AppVersion,
     ImageResizer,
     Camera,
     NoplugService,

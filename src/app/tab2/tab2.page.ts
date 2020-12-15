@@ -44,12 +44,12 @@ export class Tab2Page {
       setTimeout(() => {
         this.artList = []
         this.getArtListByschoolID(this.param, e)
-      }, 500);
-      return;
+      }, 1000);
+      // return;
     }
 
-    e.target.disabled=!true;
-    e.target.complete();
+    // e.target.disabled=!true;
+    // e.target.complete();
 
 
   }
@@ -137,13 +137,17 @@ export class Tab2Page {
     )
       .subscribe((res: any) => {
         this.lenth = res.data.length;
+        if(e == null){
+          this.dis = false;
+  
+        }
         if (e != null) {
           e.target.complete();
         }
-        if (res.data.length < PAGE_SIZE) {
+        if (e != null && res.data.length < PAGE_SIZE) {
           console.log("我也是有底线的..")
           this.dis = true;
-          e.target.disabled = true;
+          // e.target.disabled = true;
           // e.target.complete();          
         }
         for (let index = 0; index < res.data.length; index++) {

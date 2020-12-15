@@ -60,6 +60,7 @@ export class Tab1Page {
   ngOnInit(): void {
 
     this.getAllType(null);
+
   }
  
 

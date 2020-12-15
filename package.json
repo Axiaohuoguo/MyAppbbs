@@ -22,6 +22,7 @@
     "@ckeditor/ckeditor5-angular": "^2.0.1",
     "@ckeditor/ckeditor5-build-classic": "^23.1.0",
     "@ckeditor/ckeditor5-image": "^23.1.0",
+    "@ionic-native/app-version": "^5.30.0",
     "@ionic-native/camera": "^5.30.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/image-resizer": "^5.30.0",
@@ -49,6 +50,7 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "cordova-android": "^9.0.0",
+    "cordova-plugin-app-version": "^0.1.11",
     "cordova-plugin-camera": "^5.0.1",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
@@ -89,7 +91,8 @@
       "info.protonet.imageresizer": {},
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      }
+      },
+      "cordova-plugin-app-version": {}
     },
     "platforms": [
       "android"

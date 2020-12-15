@@ -127,6 +127,7 @@ export class Tab4Page implements OnInit {
         }
       })
     }, 1000);
+    
 
   }
 

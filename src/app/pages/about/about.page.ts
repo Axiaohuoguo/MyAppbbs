@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AppVersion } from '@ionic-native/app-version/ngx';
 @Component({
   selector: 'app-about',
   templateUrl: './about.page.html',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutPage implements OnInit {
 
-  constructor() { }
+  
+  version:any
+  constructor(public appVersion: AppVersion) { }
 
   ngOnInit() {
+    this.appVersion.getVersionNumber().then((value: any) => {
+      console.log(value)
+      this.version = value
+    }).catch(err => {
+      console.log('getVersionNumber:' + err);
+    });
+
+
   }
 
 }

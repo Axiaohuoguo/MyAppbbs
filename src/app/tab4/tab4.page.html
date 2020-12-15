@@ -88,7 +88,7 @@
     </ion-item>
 
     
-    <ion-item [routerLink]="[ '/applyfora' ]">
+    <ion-item *ngIf="!isShow" [routerLink]="[ '/applyfora' ]">
       <ion-icon color="secondary" name="terminal" slot="start"></ion-icon>
       <ion-label>申请成为管理</ion-label>           
     </ion-item>
