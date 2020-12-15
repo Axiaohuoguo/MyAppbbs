@@ -51,22 +51,6 @@ export class Http2Service {
 
     })
   }
-  // postUpImg(api,data): Observable<Response>{
-
-  //   let option = {
-
-  //     body: data,
-  //     headers: {
-
-  //       'Access-Control-Allow-Origin': '*',
-  //     },
-  //     withCredentials:true,
-  //     // observe: 'events',
-  //     responseType:'json',
-  //   }
-  //   return this.myRequest('post', api, option);
-
-  // }
   // options: {
   //   body?: any;
   //   headers?: HttpHeaders | {

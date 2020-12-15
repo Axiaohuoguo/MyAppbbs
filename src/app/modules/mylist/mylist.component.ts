@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 // import { PopoverComponent } from '../../component/popover/popover.component';//popover弹出菜单
 import { PopoverController } from '@ionic/angular';
 import { ListpopoverComponent } from './listpopover/listpopover.component';
-
+import { Router, RouteReuseStrategy } from '@angular/router';
 @Component({
   selector: 'app-mylist',
   templateUrl: './mylist.component.html',
@@ -19,7 +19,10 @@ export class MylistComponent implements OnInit {
   @Input() artList :any; //文章列表 all 的所有传值
   @Input() pageType:any;
 
-  constructor(public popoverController:PopoverController) {
+  constructor(
+    public popoverController:PopoverController,
+    public router:Router    
+    ) {
 
    }
 
@@ -28,6 +31,7 @@ export class MylistComponent implements OnInit {
     this.artid='66'//路由传值测试
     console.log("这是list组件",this.tabState)
     console.log(this.pageType)
+    console.log(this.router.url)
     
   }
   ngAfterContentInit(): void {

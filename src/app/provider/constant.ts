@@ -2,11 +2,11 @@
 
 
 /*-----后台Api地址-*/
-export const APP_SERVE_URL = 'http://localhost:8888/api'; //  测试用
-// export const APP_SERVE_URL = 'http://39.100.108.2/api'; // 
+// export const APP_SERVE_URL = 'http://localhost:8888/api'; //  测试用
+export const APP_SERVE_URL = 'http://39.100.108.2/api'; // 
 //后台地址
-export const APP_SERVE = "http://localhost:8888"//测试用
-// export const APP_SERVE = "http://39.100.108.2"//
+// export const APP_SERVE = "http://localhost:8888"//测试用
+export const APP_SERVE = "http://39.100.108.2"//
 
 export const QNY_SERVER = "http://coolschool.ahy1.top/"//七牛云链接
 

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>rereplypage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <span *ngIf="isRe">还没有人回复呢....</span>
+  <ion-list>
+    <ion-card *ngFor="let item of RrRepylylist">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="item.userheadimg">
+        </ion-avatar>
+        <ion-label [routerLink]=" [ '/perfile', item.rereplyuserid ]">{{item.username}}</ion-label>
+        <!-- <ion-icon name="time"></ion-icon> -->
+        <ion-text>
+          {{ item.rereplytime | date:'yyyy-MM-dd HH:mm'}}
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-text color="primary">
+          {{item.rereplycontent}}
+        </ion-text>
+      </ion-item>
+    </ion-card>
+
+  </ion-list>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-textarea [(ngModel)]="rereplyInfo.content" placeholder="输入回复内容..."></ion-textarea>
+      <ion-button (click)="onreReply()">
+        回复
+      </ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ContentPage
+  },
+  {
+    path: 'rereplypage/:reid',
+    loadChildren: () => import('./rereplypage/rereplypage.module').then( m => m.RereplypagePageModule)
   }
 ];
 

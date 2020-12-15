@@ -113,13 +113,14 @@
             <ion-button slot="end" (click)="onClick()" expand="block" fill="clear" shape="round">
               <ion-icon name="thumbs-up-outline"></ion-icon>
               <ion-text color="primary">
-                12
+                0
               </ion-text>
             </ion-button>
-            <ion-button slot="end" (click)="onClick()" expand="block" fill="clear" shape="round">
+
+            <ion-button slot="end" [routerLink]="[ 'rereplypage/', item.id ]" expand="block" fill="clear" shape="round">
               <ion-icon name="chatbox-ellipses-outline"></ion-icon>
               <ion-text color="primary">
-                11
+                ...
               </ion-text>
             </ion-button>
           </ion-item>

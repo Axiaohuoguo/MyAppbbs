@@ -68,12 +68,8 @@ export class AppModule {
   }
 
   backButtonEvent() {
-
+    
     this.platform.backButton.subscribe(() => { 
-
-      if((this.router.url).search("/content") !=-1){
-        this.nav.back()        
-      }
       if (this.router.url == '/tabs/tab1'
         || this.router.url == '/tabs/tab2'
         || this.router.url == '/tabs/tab3'
@@ -87,6 +83,13 @@ export class AppModule {
             this.panduanExit();
           }
         })
+      }
+      else{
+        
+      // if((this.router.url).search("/content") !=-1){
+      //   this.nav.back()        
+      // }
+        window.history.back()
       }
 
     })

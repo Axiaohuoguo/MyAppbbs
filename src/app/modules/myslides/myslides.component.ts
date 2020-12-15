@@ -1,6 +1,6 @@
 
-import { Component, OnInit,ViewChild} from '@angular/core';
-import { MyrequestService } from '../../services/myrequest.service'
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Http2Service } from '../../services/MyHttp2.service'
 
 @Component({
   selector: 'app-myslides',
@@ -9,38 +9,47 @@ import { MyrequestService } from '../../services/myrequest.service'
 })
 export class MyslidesComponent implements OnInit {
 
-  slideImgSrc:any =[] //轮播列表
-    //轮播的属性
-    @ViewChild('slide1', null) slide1: any;
+  slideImgSrc: any = [] //轮播列表
+  //轮播的属性
+  @ViewChild('slide1', null) slide1: any;
 
-    slidesOpts = {
-      effect: 'flip',//轮播效果
-      autoplay: {
-        delay: 1000,
-      },
-      loop: true
-    };
+  slidesOpts = {
+    effect: 'flip',//轮播效果
+    autoplay: {
+      delay: 2500,
+    },
+    loop: true
+  };
 
-  constructor(public myrequestService: MyrequestService) {
+  constructor(public http:Http2Service) {
 
-    this.slideImgSrc = this.myrequestService.slideImgSrcList; //获取图片列表
+
+  }
+  //获取图片列表
+  getslideImglist() {
+    this.slideImgSrc =[
+      '../assets/001.png'
+    ,'../assets/002.png'
+    ,'../assets/003.png'
+    ,'../assets/004.png' ]
+
   }
 
+  ngOnInit() {
 
- ngOnInit() {
-  
-  
-  console.log(this.slideImgSrc)
 
- }
+    console.log(this.slideImgSrc)
+    this.getslideImglist();
+
+  }
 
 
 
   //手动滑动后轮播图不自动轮播的解决方法
-  slideDidChange(){
+  slideDidChange() {
 
-    console.log(' this.slide1' ,this.slide1);
-    
+    console.log(' this.slide1', this.slide1);
+
     this.slide1.nativeElement.startAutoplay();
 
   }

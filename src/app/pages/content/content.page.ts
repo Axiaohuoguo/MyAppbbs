@@ -4,8 +4,7 @@ import { Http2Service } from '../../services/MyHttp2.service'
 import { NoplugService } from '../../provider/noplugService'
 import { Storage } from '@ionic/storage'
 import { NavController } from '@ionic/angular';
-import { DatePipe } from '@angular/common';
-
+// import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-content',
@@ -50,6 +49,7 @@ export class ContentPage implements OnInit {
     public storage: Storage,
     public noplugService: NoplugService,
     public nav: NavController,
+    // public platform:Platform  
   ) {
   }
 
