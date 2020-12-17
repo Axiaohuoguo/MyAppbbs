@@ -9,6 +9,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FileUploadAdapter } from '../../services/FileUploadAdapter'
 import { NoplugService } from '../../provider/noplugService'
 import { GlobalData } from '../../provider/GlobalData';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -19,17 +20,17 @@ import { GlobalData } from '../../provider/GlobalData';
 export class PulishoreditPage implements OnInit {
   public Editor = ClassicEditor; //编辑器
 
-  private pageType:any 
+  private pageType: any
   // private authorId:any;
   //编辑器的内容
-  public typeList:any = []
+  public typeList: any = []
 
   public artInfo = {
-    editorData:'',
+    editorData: '',
     artTitle: '',
     authorId: null,//作者id
     typeId: null,//类型
-    id :null       
+    id: null
   }
   //富文本编辑器配置
   public config = {
@@ -53,7 +54,7 @@ export class PulishoreditPage implements OnInit {
     public loading: LoadingController,
   ) { }
 
-  myImg(){
+  myImg() {
 
   }
   onReady(editor) {
@@ -64,9 +65,9 @@ export class PulishoreditPage implements OnInit {
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
       console.log(loader)
 
-      this.noplugService.showLoading("图片处理ing",100000)
+      this.noplugService.showLoading("图片处理ing", 100000)
+      let date = new FileUploadAdapter(loader, this.http,this.noplugService)
 
-      let date = new FileUploadAdapter(loader, this.http)
       date.upload().then((dat: any) => {
         if (dat.default != null || dat.default != undefined) {
           this.loading.dismiss()
@@ -106,7 +107,7 @@ export class PulishoreditPage implements OnInit {
       return;
     }
 
-    
+
     console.log(this.artInfo)
     let api = "/art/artpulish"
     this.noplugService.showLoading("发布中...")
@@ -114,16 +115,16 @@ export class PulishoreditPage implements OnInit {
       console.log(res)
       if (res.code == 200) {
         this.loading.dismiss()
-        let tip ;
-        if(this.artInfo.typeId == 1||this.artInfo.typeId==6|| this.artInfo.typeId==7){
-          tip ="发布成功..!等待管理员审核"
+        let tip;
+        if (this.artInfo.typeId == 1 || this.artInfo.typeId == 6 || this.artInfo.typeId == 7) {
+          tip = "发布成功..!等待管理员审核"
         }
-        else{tip = "发布成功.."}
+        else { tip = "发布成功.." }
         this.noplugService.alert(tip)
-        
+
         this.nav.navigateRoot(['content/', res.data.insertId])
       }
-      else{
+      else {
         this.loading.dismiss()
         this.noplugService.alert(res.msg)
       }
@@ -139,7 +140,7 @@ export class PulishoreditPage implements OnInit {
   getAuthorId() {
     this.storage.get("userinfo").then(dat => {
       if (dat == '' || dat == null) {
-        this.noplugService.showToast("登录超时,请重新登录",1000,'top','warning');
+        this.noplugService.showToast("登录超时,请重新登录", 1000, 'top', 'warning');
         this.nav.navigateRoot(['./login'])
       } else {
         this.artInfo.authorId = JSON.parse(dat)._userId
@@ -148,8 +149,8 @@ export class PulishoreditPage implements OnInit {
     })
   }
   // 过得类型
-  getTypeList(){
-    this.storage.get("typeinfo").then((res:any)=>{
+  getTypeList() {
+    this.storage.get("typeinfo").then((res: any) => {
       console.log(res)
       this.typeList = res
     })
@@ -172,18 +173,18 @@ export class PulishoreditPage implements OnInit {
       this.pageType = false;
       this.artInfo.id = id
       console.log("修改")
-      this. getTypeList();
-      this.getArtInfoByid(id)      
+      this.getTypeList();
+      this.getArtInfoByid(id)
 
     }
 
 
   }
   //通过文章id获得文章信息
-  getArtInfoByid(id){
-    let api  = "/art/getartinfobyid"
-    let par = {"id":id}
-    this.http.get(api,par).subscribe((res:any)=>{
+  getArtInfoByid(id) {
+    let api = "/art/getartinfobyid"
+    let par = { "id": id }
+    this.http.get(api, par).subscribe((res: any) => {
       console.log(res);
       this.artInfo.artTitle = res.data.arttitle
       this.artInfo.typeId = res.data.typeid
@@ -204,7 +205,7 @@ export class PulishoreditPage implements OnInit {
 
   }
   //修改按钮
-  onEdit(){
+  onEdit() {
     if (this.artInfo.artTitle.length < 5) {
       this.noplugService.alert("标题不能少于五个字...")
       return;
@@ -217,14 +218,14 @@ export class PulishoreditPage implements OnInit {
     console.log(this.artInfo)
     let api = "/art/updateart"
     this.noplugService.showLoading()
-    this.http.post(api, this.artInfo).subscribe((res: any) => {      
+    this.http.post(api, this.artInfo).subscribe((res: any) => {
       console.log(res)
       if (res.code == 200) {
         this.loading.dismiss()
         this.nav.navigateRoot(['content/', res.data.artid])
 
       }
-      else{
+      else {
         this.loading.dismiss()
         this.noplugService.alert(res.msg)
       }

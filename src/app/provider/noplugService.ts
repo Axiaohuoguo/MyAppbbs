@@ -156,105 +156,164 @@ export class NoplugService {
 * 通过拍照获取照片
 * @param options
 */
-    getPictureByCamera(options: CameraOptions = {}): Observable<string> {
-      let ops: CameraOptions = Object.assign({
-        sourceType: this.camera.PictureSourceType.CAMERA,
-        destinationType: this.camera.DestinationType.FILE_URI//DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
-      }, options);
-      return this.getPicture(ops);
-    };
+  getPictureByCamera(options: CameraOptions = {}): Observable<string> {
+    let ops: CameraOptions = Object.assign({
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      destinationType: this.camera.DestinationType.FILE_URI//DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
+    }, options);
+    return this.getPicture(ops);
+  };
 
   /**
    * 通过图库获取照片
    * @param options
    */
-    getPictureByPhotoLibrary(options: CameraOptions = {}): Observable<string> {
-      let ops: CameraOptions = Object.assign({
-        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        destinationType: this.camera.DestinationType.FILE_URI//DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
-      }, options);
-      return this.getPicture(ops);
-    };
+  getPictureByPhotoLibrary(options: CameraOptions = {}): Observable<string> {
+    let ops: CameraOptions = Object.assign({
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.FILE_URI//DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
+    }, options);
+    return this.getPicture(ops);
+  };
+
+  /**
+* 使用cordova-plugin-camera获取照片
+* @param options
+*/
+  getPicture(options: CameraOptions = {}): Observable<string> {
+    let ops: CameraOptions = Object.assign({
+      sourceType: this.camera.PictureSourceType.CAMERA,//图片来源,CAMERA:拍照,PHOTOLIBRARY:相册
+      destinationType: this.camera.DestinationType.DATA_URL,//默认返回base64字符串,DATA_URL:base64   FILE_URI:图片路径
+      quality: QUALITY_SIZE,//图像质量，范围为0 - 100
+      //allowEdit: true,//选择图片前是否允许编辑
+      encodingType: this.camera.EncodingType.JPEG,
+      targetWidth: IMAGE_SIZE,//缩放图像的宽度（像素）
+      targetHeight: IMAGE_SIZE,//缩放图像的高度（像素）
+      saveToPhotoAlbum: false,//是否保存到相册
+      correctOrientation: true//设置摄像机拍摄的图像是否为正确的方向
+    }, options);
+    return Observable.create(observer => {
+      this.camera.getPicture(ops).then((imgData: string) => {
+        if (ops.destinationType === this.camera.DestinationType.DATA_URL) {
+          observer.next('data:image/jpg;base64,' + imgData);
+        } else {
+          observer.next(imgData);
+        }
+      }).catch(err => {
+        if (err == 20) {
+          this.alert('没有权限,请在设置中开启权限');
+          return;
+        }
+        if (String(err).indexOf('cancel') != -1) {
+          return;
+        }
+        // this.logger.log(err, '使用cordova-plugin-camera获取照片失败');
+        this.alert('获取照片失败');
+      });
+    });
+  };
+
+
+  /**
+   * 按钮列表
+   */
+  async presentActionSheet(call: any) {
+
+    const actionSheet = await this.actionSheetController.create({
+      header: '选择操作',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: '测试模式',
+        role: 'destructive',
+        icon: 'analytics',
+        handler: () => {
+
+          call('test')
+          console.log('浏览器测试');
+        }
+      }, {
+        text: '从相册选择',
+        icon: 'images',
+        handler: () => {
+          call('images')
+          console.log('重相册选择');
+        }
+      }, {
+        text: '拍照',
+        icon: 'camera',
+        handler: () => {
+          call('camera')
+          console.log('拍照');
+        }
+      }, {
+        text: '取消',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          call(false)
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+
+// 获得base64流数据
+  getImgBas64(file) {
     
-      /**
-    * 使用cordova-plugin-camera获取照片
-    * @param options
-    */
-    getPicture(options: CameraOptions = {}): Observable<string> {
-      let ops: CameraOptions = Object.assign({
-        sourceType: this.camera.PictureSourceType.CAMERA,//图片来源,CAMERA:拍照,PHOTOLIBRARY:相册
-        destinationType: this.camera.DestinationType.DATA_URL,//默认返回base64字符串,DATA_URL:base64   FILE_URI:图片路径
-        quality: QUALITY_SIZE,//图像质量，范围为0 - 100
-        //allowEdit: true,//选择图片前是否允许编辑
-        encodingType: this.camera.EncodingType.JPEG,
-        targetWidth: IMAGE_SIZE,//缩放图像的宽度（像素）
-        targetHeight: IMAGE_SIZE,//缩放图像的高度（像素）
-        saveToPhotoAlbum: false,//是否保存到相册
-        correctOrientation: true//设置摄像机拍摄的图像是否为正确的方向
-      }, options);
-      return Observable.create(observer => {
-        this.camera.getPicture(ops).then((imgData: string) => {
-          if (ops.destinationType === this.camera.DestinationType.DATA_URL) {
-            observer.next('data:image/jpg;base64,' + imgData);
-          } else {
-            observer.next(imgData);
-          }
-        }).catch(err => {
-          if (err == 20) {
-            this.alert('没有权限,请在设置中开启权限');
-            return;
-          }
-          if (String(err).indexOf('cancel') != -1) {
-            return;
-          }
-          // this.logger.log(err, '使用cordova-plugin-camera获取照片失败');
-          this.alert('获取照片失败');
-        });
-      });
-    };
-
-
-    /**
-     * 按钮列表
-     */
-    async presentActionSheet(call:any) {
-      
-      const actionSheet = await this.actionSheetController.create({
-        header: '选择操作',
-        cssClass: 'my-custom-class',
-        buttons: [{
-          text: '测试模式',
-          role: 'destructive',
-          icon: 'analytics',
-          handler: () => {
-
-            call('test')
-            console.log('浏览器测试');
-          }
-        }, {
-          text: '从相册选择',
-          icon: 'images',
-          handler: () => {
-            call('images')
-            console.log('重相册选择');
-          }
-        }, {
-          text: '拍照',
-          icon: 'camera',
-          handler: () => {
-            call('camera')
-            console.log('拍照');
-          }
-        }, {
-          text: '取消',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            call(false)
-            console.log('Cancel clicked');
-          }
-        }]
-      });
-      await actionSheet.present();
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = (e) => {
+      // e.target.result 是图片的 base64 流数据
+      console.log(e.target.result)
     }
+  }
+  //压缩图片
+  compressImage(base64Img){
+    const image = new Image()
+    image.src = base64Img
+    return new Promise(resolve => {
+      image.onload = () => {
+        let { width, height } :any = image
+        if (width > 1024) {
+          width = 1024
+          height = Math.ceil(1024 * image.height / image.width)
+        }
+        let canvas:any = document.getElementById("compressCanvas")
+        if(!canvas){
+          const body = document.body
+          canvas = document.createElement('canvas') // 创建canvas标签
+          canvas.id = 'compressCanvas' // 给外层容器添加一个id
+          canvas.style.position = 'fixed'
+          canvas.style.zIndex = '-1'
+          canvas.style.opacity = '0'
+          canvas.style.top = '-100%'
+          canvas.style.left = '-100%'
+          body.append(canvas)
+        }
+        const context = canvas.getContext("2d")
+        canvas.height = height
+        canvas.width = width
+        context.drawImage(image, 0, 0, width, height)
+        const compressBase64 = canvas.toDataURL('image/jpeg', '0.7')
+        resolve(compressBase64)
+      }
+    })
+  }
+//base4ToFile
+base4ToFile (base64Image, fileName) {
+  const arr = base64Image.split(',')
+  const mime = arr[0].match(/:(.*?);/)[1]
+  const bstr = atob(arr[1])
+  let n = bstr.length
+  const u8arr = new Uint8Array(n)
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n)
+  }
+  fileName = fileName || ('pj' + Date.now() + '.jpg')
+  var file = new File([u8arr], fileName, { type: mime })
+  return file
+}
+
 }

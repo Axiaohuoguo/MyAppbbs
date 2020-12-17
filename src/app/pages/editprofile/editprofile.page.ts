@@ -18,25 +18,25 @@ export class EditprofilePage implements OnInit {
 
   public isEditPawss: boolean = false
 
-  public userPainfo:any={
-    username:'',
-    userid:-1,
-    password:'',
-    newpassword:'',
-    renewpassword:''
+  public userPainfo: any = {
+    username: '',
+    userid: -1,
+    password: '',
+    newpassword: '',
+    renewpassword: ''
   }
 
-  public userInfo: any={
-    id:null,
-    schoolid:null,
-    uid:null,
-    useremail:null,
-    userheadimg:null,
-    username:null,
-    userpassword:null,
-    userphone:null,
-    usersignature:null,
-    usertype:null,
+  public userInfo: any = {
+    id: null,
+    schoolid: null,
+    uid: null,
+    useremail: null,
+    userheadimg: null,
+    username: null,
+    userpassword: null,
+    userphone: null,
+    usersignature: null,
+    usertype: null,
   }
   public userid: any
 
@@ -51,16 +51,16 @@ export class EditprofilePage implements OnInit {
 
   }
 
-  myImageResizer(uri,folderName){
+  myImageResizer(uri, folderName) {
     let options = {
       uri: uri,
-      folderName: folderName ,
+      folderName: folderName,
       quality: 90,
       width: 500,
       height: 500
-     } as ImageResizerOptions;
-     
-  return this.imageResizer.resize(options)
+    } as ImageResizerOptions;
+
+    return this.imageResizer.resize(options)
 
   }
 
@@ -76,7 +76,7 @@ export class EditprofilePage implements OnInit {
     return (val == null || typeof val === 'string' && val.replace(reg, '').length == 0)
   }
   //提交修改-资料
-  onComEdit(){
+  onComEdit() {
     //注册事件
     let reg = /^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$/i;
     if (this.isEmpty(this.userInfo.username)) {
@@ -87,71 +87,71 @@ export class EditprofilePage implements OnInit {
       this.noplugService.alert("提示", "手机、邮箱不能为空")
       return;
     }
-    if (!reg.test(this.userInfo.useremail)){
-      this.noplugService.alert("提示","邮箱格式不正确");
+    if (!reg.test(this.userInfo.useremail)) {
+      this.noplugService.alert("提示", "邮箱格式不正确");
       return;
     }
-    if((this.userInfo.userphone+"").length != 11 ){
-      this.noplugService.alert("提示","电话格式不正确");
+    if ((this.userInfo.userphone + "").length != 11) {
+      this.noplugService.alert("提示", "电话格式不正确");
       return;
     }
-    if((this.userInfo.username).length<5){
-      this.noplugService.alert("提示","用户名太短了...");
+    if ((this.userInfo.username).length < 5) {
+      this.noplugService.alert("提示", "用户名太短了...");
       return;
     }
-    if((this.userInfo.usersignature).length>20||(this.userInfo.usersignature).length<2){
-      this.noplugService.alert("提示","个性签名在2-20个字符...");
+    if ((this.userInfo.usersignature).length > 20 || (this.userInfo.usersignature).length < 2) {
+      this.noplugService.alert("提示", "个性签名在2-20个字符...");
       return;
     }
 
-    let api = "/user/updateuserinfo"    
-    this.http.post(api,this.userInfo).subscribe((res:any)=>{
-      if(res.code == 200){
+    let api = "/user/updateuserinfo"
+    this.http.post(api, this.userInfo).subscribe((res: any) => {
+      if (res.code == 200) {
         this.noplugService.alert("修改成功..清重新登录")
         setTimeout(() => {
           this.nav.navigateRoot(['./login'])
         }, 1000);
       }
-      else{
+      else {
         this.noplugService.alert(res.msg)
       }
     })
 
   }
   //提交修改-密码
-  onComEditPaw(){
-    if(this.isEmpty(this.userPainfo.password) 
-    ||this.isEmpty(this.userPainfo.newpassword)
-    ||this.isEmpty(this.userPainfo.renewpassword) ){
+  onComEditPaw() {
+    if (this.isEmpty(this.userPainfo.password)
+      || this.isEmpty(this.userPainfo.newpassword)
+      || this.isEmpty(this.userPainfo.renewpassword)) {
       this.noplugService.alert("提示", "参数为空！！！")
       return;
     }
-    if(this.userPainfo.newpassword !=this.userPainfo.renewpassword){
+    if (this.userPainfo.newpassword != this.userPainfo.renewpassword) {
       this.noplugService.alert("提示", "两次新密码不一致！！！")
       return
     }
-    if((this.userPainfo.newpassword).length<6){
+    if ((this.userPainfo.newpassword).length < 6) {
       this.noplugService.alert("提示", "密码至少6位！")
       return
     }
-    this.getUser().subscribe(us=>{
-      if(us!=null){
+    this.getUser().subscribe(us => {
+      if (us != null) {
         console.log(us)
         this.userPainfo.userid = us._userId
         this.userPainfo.username = us._username
-      }      
+      }
     })
     console.log(this.userPainfo)
-    let api = "/user/updateuserpasw"    
-    this.http.post(api,this.userPainfo).subscribe((res:any)=>{
+    let api = "/user/updateuserpasw"
+    this.http.post(api, this.userPainfo).subscribe((res: any) => {
       console.log(res)
-      if(res.code == 200){
+      if (res.code == 200) {
         this.noplugService.alert("修改成功..清重新登录")
         setTimeout(() => {
           this.nav.navigateRoot(['./login'])
         }, 1000);
       }
-      else{
+      else {
         this.noplugService.alert(res.msg)
       }
     })
@@ -159,31 +159,45 @@ export class EditprofilePage implements OnInit {
   }
 
   onchangeIng(e) {
+    const file = e.target.files[0]
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = (e) => {
+      // e.target.result 是图片的 base64 流数据
+      console.log(e.target.result)
+      this.noplugService.compressImage(e.target.result).then(compressImg => {
+        const compressFile = this.noplugService.base4ToFile(compressImg, file.name)
+        // 此处进行上传功能的书写
+        this.uplodeimg(compressFile).then(a => {
+          console.log(a.default);
+          if (a != null) {
+            this.userInfo.userheadimg = a.default
+          }
+        })
+        console.log(compressFile)
+      })
 
-    this.uplodeimg(e.target.files[0]).then(a=>{
-      console.log(a.default);
-      if(a!=null){
-        this.userInfo.userheadimg = a.default
-      }
-    })
+    }
+
+
   }
   getUserInfoByUserId() {
 
-    this.getUser().subscribe(us=>{
-      if(us !=null){
+    this.getUser().subscribe(us => {
+      if (us != null) {
         this.userid = us._userId
         let api = "/user/getuserinfobyuserid"
-        let par = {"userid":this.userid}
-        this.http.get(api,par).subscribe((res:any)=>{
+        let par = { "userid": this.userid }
+        this.http.get(api, par).subscribe((res: any) => {
           console.log(res)
-          if(res.code==200){
+          if (res.code == 200) {
             this.userInfo = res.data;
           }
         })
       }
-      
+
     })
-    
+
 
   }
   // 获得当前用户id
@@ -209,7 +223,7 @@ export class EditprofilePage implements OnInit {
   uplodeimg(img): Promise<any> {
 
     console.log("==========================")
-    console.log("type",typeof(img))
+    console.log("type", typeof (img))
 
     const data = new FormData();
     let api = '/upload/uploadimg'
@@ -217,7 +231,7 @@ export class EditprofilePage implements OnInit {
     return new Promise((resolve, reject) => {
       console.log("res", img)
       data.append('file', img);
-      console.log("data", typeof(data))
+      console.log("data", typeof (data))
 
       let da = this.http.post(api, data)
       da.subscribe((data: any) => {
@@ -238,24 +252,24 @@ export class EditprofilePage implements OnInit {
   isEditP() {
     this.isEditPawss = !this.isEditPawss
   }
-  
 
-//  1、M转F
 
-// File file = new File(path); 
+  //  1、M转F
 
-// FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);  
+  // File file = new File(path); 
 
-// 2、F转M
+  // FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);  
 
-// File file = new File("src/test/resources/input.txt");
+  // 2、F转M
 
-// FileInputStream input = new FileInputStream(file);
+  // File file = new File("src/test/resources/input.txt");
 
-// MultipartFile multipartFile =new MockMultipartFile("file", file.getName(), "text/plain", IOUtils.toByteArray(input));
+  // FileInputStream input = new FileInputStream(file);
+
+  // MultipartFile multipartFile =new MockMultipartFile("file", file.getName(), "text/plain", IOUtils.toByteArray(input));
   onSheet() {
-    
-    this.noplugService.presentActionSheet(call => {      
+
+    this.noplugService.presentActionSheet(call => {
 
       if (call == 'test') {
         console.log("ttttt")
@@ -264,22 +278,22 @@ export class EditprofilePage implements OnInit {
       }
       if (call == 'images') {
         console.log(2)
-        this.noplugService.getPictureByPhotoLibrary().subscribe(a=>{
-          console.log('img',a)
-          console.log(typeof(a))
+        this.noplugService.getPictureByPhotoLibrary().subscribe(a => {
+          console.log('img', a)
+          console.log(typeof (a))
 
-          this.myImageResizer(a,"img").then((filePath: string) => console.log('FilePath', filePath))
-          .catch(e => console.log(e));
-          
+          this.myImageResizer(a, "img").then((filePath: string) => console.log('FilePath', filePath))
+            .catch(e => console.log(e));
+
         })
         return
       }
       if (call == 'camera') {
-        this.noplugService.getPictureByCamera().subscribe(ca=>{
-          console.log('ca',ca)
-          console.log(typeof(ca))
-          this.myImageResizer(ca,"ca").then((filePath: string) => console.log('FilePath', filePath))
-          .catch(e => console.log(e));
+        this.noplugService.getPictureByCamera().subscribe(ca => {
+          console.log('ca', ca)
+          console.log(typeof (ca))
+          this.myImageResizer(ca, "ca").then((filePath: string) => console.log('FilePath', filePath))
+            .catch(e => console.log(e));
 
         })
         console.log(3)
