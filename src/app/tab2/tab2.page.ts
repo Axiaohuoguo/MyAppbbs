@@ -14,6 +14,7 @@ import { map, filter } from 'rxjs/operators' // 工具
 export class Tab2Page {
 
   public artList: any = []//文章列表
+  public ollwArtList: any = [] //关注者的文章
   public lenth;//当前数据条数
   public dis: any = false //是否还显示"加载更多
   public defaultArtImg = "../../assets/images/head1.png" //卡片默认图片
@@ -23,6 +24,11 @@ export class Tab2Page {
     page: 1,
     size: PAGE_SIZE,
     schoolid: null
+  }
+  public paramf: any = {
+    page: 1,
+    size: PAGE_SIZE,
+    userid: null
   }
   //top栏dom
   @ViewChild('segment1', null) segment1: any;
@@ -37,15 +43,21 @@ export class Tab2Page {
   }
   // 下拉刷新
   doRefresh(e) {
-   
+
     if (this.tabState == "all") {
       this.param.page = 1;
-      
+
       setTimeout(() => {
         this.artList = []
         this.getArtListByschoolID(this.param, e)
       }, 1000);
-      // return;
+    }
+    else if (this.tabState == "follow") {//关注
+      this.paramf.page = 1;
+      setTimeout(() => {
+        this.ollwArtList = []
+        this.getFollwArtList(this.paramf, e)
+      }, 1000);
     }
 
     // e.target.disabled=!true;
@@ -62,17 +74,24 @@ export class Tab2Page {
 
   getDefault() {
 
-    this.getSchoolid().subscribe((res: Number) => {
+    this.getUserInfo().subscribe((res: any) => {
       console.log(res)
       if (res != null) {
-        this.param.schoolid = res
-        this.getArtListByschoolID(this.param, null)
+        this.param.schoolid = res._schoolid
+        this.paramf.userid = res._userId
+        if (this.tabState == "all") {
+          this.getArtListByschoolID(this.param, null)
+        }
+        else if (this.tabState == "follow") {//关注
+          this.getFollwArtList(this.paramf, null)
+        }
+
       }
     })
   }
 
-  //获得当前登录用户的学校id
-  getSchoolid(): Observable<any> {
+  //获得当前登录用户 学校id,用户id
+  getUserInfo(): Observable<any> {
     return new Observable(obser => {
 
       this.storage.get("userinfo").then((dat: any) => {
@@ -80,12 +99,9 @@ export class Tab2Page {
           obser.error()
           this.nav.navigateRoot(['./login']);
         }
-        obser.next(JSON.parse(dat)._schoolid)
+        obser.next(JSON.parse(dat))
       })
-
     })
-
-
   }
 
   //去掉文字中的html标签
@@ -107,11 +123,52 @@ export class Tab2Page {
 
   //保留多少文字
   retainNmb(str: String, num: number) {
-
-    return str.substr(1, num)+"......";
-
+    return str.substr(1, num) + "...";
   }
 
+  // 获得关注动态
+  getFollwArtList(param, e) {
+    let api = "/art/getfollwartlist"
+    let dat = this.http.get(api, param)
+    dat.pipe(
+      map((re: any) => {
+        console.log(re.data)
+
+        for (let index = 0; index < re.data.length; index++) {
+          let imgurl = this.fondImgHtml(re.data[index].artcontent)
+
+          if (imgurl != "-1") {
+            re.data[index].defaultArtImg = imgurl;
+          }
+          else {
+            re.data[index].defaultArtImg = this.defaultArtImg
+          }
+          re.data[index].artcontent = this.atchReg(re.data[index].artcontent)
+        }
+        return re
+      })
+    )
+      .subscribe((res: any) => {
+        this.lenth = res.data.length;
+        if (e == null) {
+          this.dis = false;
+
+        }
+        if (e != null) {
+          e.target.complete();
+        }
+        if (e != null && res.data.length < PAGE_SIZE) {
+          console.log("我也是有底线的..")
+          this.dis = true;
+        }
+        for (let index = 0; index < res.data.length; index++) {
+          this.ollwArtList.push(res.data[index])
+        }
+        console.log(res)
+
+      })
+
+  }
   //通过学校id获得动态列表
   getArtListByschoolID(param, e) {
     let api = "/art/selectartlist"
@@ -137,9 +194,9 @@ export class Tab2Page {
     )
       .subscribe((res: any) => {
         this.lenth = res.data.length;
-        if(e == null){
+        if (e == null) {
           this.dis = false;
-  
+
         }
         if (e != null) {
           e.target.complete();
@@ -165,16 +222,24 @@ export class Tab2Page {
 
     console.log('Segment changed', e.detail.value);
     this.tabState = e.detail.value;
+    this.getDefault()
 
   }
 
   //加载更多
   loadData(e) {
+    if (this.tabState == "all") {
+      this.param.page++
+      this.getArtListByschoolID(this.param, e)
+    }
+    else if (this.tabState == "follow") {//关注
+      this.paramf.page++
+      this.getFollwArtList(this.paramf, e)
+    }
     console.log(this.param)
     console.log("------------")
     console.log(e);
-    this.param.page++
-    this.getArtListByschoolID(this.param, e)
+
 
   }
 

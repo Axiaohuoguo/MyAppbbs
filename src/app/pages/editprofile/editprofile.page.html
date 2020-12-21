@@ -12,39 +12,48 @@
   <div *ngIf="!isEditPawss">
     <div class="div_head" (click)="onSheet()">
       <img [src]="userInfo.userheadimg">
-    </div>  
+    </div>
 
-    <input hidden type="file" id="inputfile"
-     (change)="onchangeIng($event)" 
-     accept="image/gif,image/png, image/jpeg"/>
+    <input hidden type="file" id="inputfile" (change)="onchangeIng($event)" accept="image/gif,image/png, image/jpeg" />
 
     <ion-item>
-      <ion-label >
+      <ion-label color="primary">注册时间: {{userInfo.userregtime | date:'yyyy-MM-dd HH:mm'}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">账号: {{userInfo.uid}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
         用户名:
       </ion-label>
       <ion-input name="username" [(ngModel)]="userInfo.username" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>账号: {{userInfo.uid}}</ion-label>
+      <ion-label>性别</ion-label>
+      <ion-select (value)="userInfo.usersex" [(ngModel)]="userInfo.usersex">
+        <ion-select-option [value]="opt1">男</ion-select-option>
+        <ion-select-option [value]="opt0">女</ion-select-option>
+      </ion-select>
     </ion-item>
-  
+
     <ion-item>
-      <ion-label >
+      <ion-label>
         签名:
       </ion-label>
-      <ion-input name="usersignature" [(ngModel)]="userInfo.usersignature"  type="text"></ion-input>
+      <ion-input name="usersignature" [(ngModel)]="userInfo.usersignature" type="text"></ion-input>
     </ion-item>
-  
+
     <ion-item>
-      <ion-label >
+      <ion-label>
         邮箱:
       </ion-label>
-      <ion-input name="email" [(ngModel)]="userInfo.useremail"  type="email"></ion-input>
+      <ion-input name="email" [(ngModel)]="userInfo.useremail" type="email"></ion-input>
     </ion-item>
-  
+
     <ion-item>
-  
-      <ion-label >
+
+      <ion-label>
         手机:
       </ion-label>
       <ion-input type="number" [(ngModel)]="userInfo.userphone" name="phone"></ion-input>
@@ -60,25 +69,25 @@
   <div *ngIf="isEditPawss">
 
     <ion-item>
-      <ion-label  position="floating">原密码</ion-label>
+      <ion-label position="floating">原密码</ion-label>
       <ion-input name="password" [(ngModel)]="userPainfo.password" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">新密码: </ion-label>
-      <ion-input  name="newpassword" [(ngModel)]="userPainfo.newpassword"  type="text"></ion-input>
+      <ion-input name="newpassword" [(ngModel)]="userPainfo.newpassword" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label  position="floating">确认新密码: </ion-label>
-      <ion-input name="renewpassword"  [(ngModel)]="userPainfo.renewpassword" type="text"></ion-input>
+      <ion-label position="floating">确认新密码: </ion-label>
+      <ion-input name="renewpassword" [(ngModel)]="userPainfo.renewpassword" type="text"></ion-input>
     </ion-item>
   </div>
 
   <ion-button *ngIf="!isEditPawss" (click)="onComEdit()" expand="block" shape="round">
     修改资料
   </ion-button>
-  
+
   <ion-button *ngIf="isEditPawss" (click)="onComEditPaw()" expand="block" shape="round">
     修改密码
   </ion-button>

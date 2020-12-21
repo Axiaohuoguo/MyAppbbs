@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Http2Service } from '../../services/MyHttp2.service'
 import { NoplugService } from '../../provider/noplugService'
 import { Storage } from '@ionic/storage'
-import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, filter } from 'rxjs/operators' // 工具
+import { LoadingController, NavController } from '@ionic/angular';
 @Component({
   selector: 'app-perfile',
   templateUrl: './perfile.page.html',
@@ -28,6 +28,7 @@ export class PerfilePage implements OnInit {
     userheadimg: '',
     username: 'null',
     usersignature: 'null',
+    usersex:-1
   }
 
   constructor(
@@ -36,24 +37,24 @@ export class PerfilePage implements OnInit {
     public storage: Storage,
     public nav: NavController,
     public routerinfo: ActivatedRoute,
+    public loading: LoadingController
   ) { }
 
   ngOnInit() {
     this.tuserid = this.routerinfo.snapshot.params['userid']
-
     this.getUserInfoByUserId(this.routerinfo.snapshot.params['userid'])
     this.getUser().subscribe(data => {
-      // console.log(data)
-      this.myuserid = data._userId
+      
+      this.myuserid = data._userId      
       if (data._usertype == "999") {
         this.isAdmin = true
       }
       if (data != null) {
         this.isFollowT(this.myuserid, this.tuserid)
-
       }
+      
     })
-
+    
 
   }
 
@@ -95,7 +96,7 @@ export class PerfilePage implements OnInit {
     let api = "/user/follow"
     let par = { "myid": this.myuserid, "taid": this.tuserid }
     this.http.get(api, par).subscribe((res: any) => {
-      console.log(res)
+      console.log(res)      
       if (res.code == 200) {
         this.noplugService.alert("关注成功")
         this.isFollow = !this.isFollow
@@ -109,7 +110,6 @@ export class PerfilePage implements OnInit {
   }
   //取消关注
   onnuFollow() {
-
     let api = "/user/unfollow"
     let par = { "myid": this.myuserid, "taid": this.tuserid }
     this.http.get(api, par).subscribe((res: any) => {
@@ -126,7 +126,7 @@ export class PerfilePage implements OnInit {
   }
 
   // 获得当前用户
-  getUser(): Observable<any> {
+  getUser(): Observable<any> {   
     return new Observable(obser => {
       this.storage.get("userinfo").then((user: any) => {
         if (user == null) {
@@ -135,18 +135,17 @@ export class PerfilePage implements OnInit {
           obser.error("erro")
         }
         obser.next(JSON.parse(user))
-
       })
-
+      
     })
   }
 
-  getUserInfoByUserId(uiserid) {
+  getUserInfoByUserId(uiserid) {  
+    this.noplugService.showLoading("",10000)
     let api = "/user/getuserinfobyuserid"
     let par = { "userid": uiserid }
-    let data = this.http.get(api, par)
+    let data = this.http.get(api, par) 
     data.pipe(
-
       map((re: any) => {
         let infoa = re.data
 
@@ -154,8 +153,8 @@ export class PerfilePage implements OnInit {
         infoa.userphone = ''
         return infoa
       })
-
     ).subscribe(a => {
+      this.loading.dismiss()
       console.log(a)
       if (a.usertype == '-1') {
         this.butFlag = false;
@@ -167,7 +166,7 @@ export class PerfilePage implements OnInit {
       this.userInfo = a
 
     })
-
+    
   }
 
 

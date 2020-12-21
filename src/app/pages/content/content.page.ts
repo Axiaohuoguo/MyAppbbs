@@ -3,9 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Http2Service } from '../../services/MyHttp2.service'
 import { NoplugService } from '../../provider/noplugService'
 import { Storage } from '@ionic/storage'
-import { NavController } from '@ionic/angular';
 // import { Platform } from '@ionic/angular';
-
+import { LoadingController, NavController } from '@ionic/angular';
 @Component({
   selector: 'app-content',
   templateUrl: './content.page.html',
@@ -49,6 +48,7 @@ export class ContentPage implements OnInit {
     public storage: Storage,
     public noplugService: NoplugService,
     public nav: NavController,
+    public loading: LoadingController
     // public platform:Platform  
   ) {
   }
@@ -123,7 +123,6 @@ export class ContentPage implements OnInit {
   //获得当前文章的回复
   getReplyinfoByArtid(id: Number) {
     let par = { "artid": id }
-
     let api = "/art/getreplylist"
     this.http.get(api, par).subscribe((res: any) => {
       console.log(res)
@@ -145,7 +144,7 @@ export class ContentPage implements OnInit {
       this.likeClass = "thumbs-up-outline"
     }
   }
-  ngOnInit() {
+  ngOnInit() {    
     this.artid = this.routerinfo.snapshot.params['artid']
     console.log("传过来的artid", this.artid);
     this.getarticleInfo(this.artid)
@@ -171,7 +170,6 @@ export class ContentPage implements OnInit {
   }
   //通过id获取文章
   getarticleInfo(id) {
-
     let api = "/art/getartinfobyid"
     let par = { "id": id }
     this.http.get(api, par).subscribe((res: any) => {
@@ -179,8 +177,7 @@ export class ContentPage implements OnInit {
       this.articleInfo.arteditime = this.rTime(res.data.arteditime)
       this.replyInfo.artId = res.data.id;
       // console.log(this.rTime(res.data.arteditime))
-      console.log(this.articleInfo)
-
+      console.log(this.articleInfo)      
     })
   }
 

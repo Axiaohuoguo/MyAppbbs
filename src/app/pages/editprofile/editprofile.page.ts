@@ -37,7 +37,11 @@ export class EditprofilePage implements OnInit {
     userphone: null,
     usersignature: null,
     usertype: null,
+    usersex: -1
   }
+  //候选数据解决选择框绑定数字的问题
+  public opt0: number = 0
+  public opt1: number = 1
   public userid: any
 
   constructor(

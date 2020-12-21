@@ -73,7 +73,7 @@ export class PulishoreditPage implements OnInit {
           this.loading.dismiss()
         }
         else{
-
+          this.loading.dismiss()
           this.noplugService.alert("图片上传失败...")
         }
 

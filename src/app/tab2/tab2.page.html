@@ -44,7 +44,7 @@
     </div>
 
     <div class="con2" *ngSwitchCase="'follow'">
-      <app-mylist [tabState]="tabState"> </app-mylist>
+      <app-mylist [tabState]="tabState"[artList]='this'> </app-mylist>
     </div>
 
     <div class="con3" *ngSwitchCase="'other'">

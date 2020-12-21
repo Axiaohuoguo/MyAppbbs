@@ -121,7 +121,7 @@ export class NoplugService {
    * http请求默认转圈圈，请求前调用此方法禁用转圈圈
    */
   setLoadingTrue() {
-    this.globalData.showLoading = false;
+    this.globalData.showLoading = true;
   }
   /**
    * 关闭loading
